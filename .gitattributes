@@ -1,0 +1,56 @@
+# Attributes
+[attr]plain-text-file text diff working-tree-encoding=UTF-8 whitespace=tabwidth=4
+[attr]binary-file -diff -merge -text
+[attr]lfs-binary-file filter=lfs diff=lfs merge=lfs -text
+[attr]lfs-text-file filter=lfs diff=lfstext merge=lfstext -text
+
+# UE file types
+*.uasset lfs-binary-file
+*.umap lfs-binary-file
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Plain text types
+*.h plain-text-file
+*.cpp plain-text-file
+*.cs plain-text-file
+*.ush plain-text-file
+*.uproject plain-text-file
+*.md plain-text-file
+*.txt plain-text-file
+
+# Force batch scripts to always use CRLF line endings so that if a repo is accessed
+# in Windows via a file share from Linux, the scripts will work.
+*.{cmd,[cC][mM][dD]} plain-text-file eol=crlf
+*.{bat,[bB][aA][tT]} plain-text-file eol=crlf
+*.{ics,[iI][cC][sS]} plain-text-file eol=crlf
+
+# Force bash scripts to always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will work.
+*.sh plain-text-file eol=lf
+
+# Raw Content types
+*.fbx lfs-binary-file
+*.3ds lfs-binary-file
+*.psd lfs-binary-file
+*.png lfs-binary-file
+*.bmp lfs-binary-file
+*.mp3 lfs-binary-file
+*.wav lfs-binary-file
+*.xcf lfs-binary-file
+*.jpg lfs-binary-file
+
+# Binaries
+*.so lfs-binary-file
+*.dylib lfs-binary-file
+*.dll lfs-binary-file
+*.lai lfs-binary-file
+*.la lfs-binary-file
+*.a lfs-binary-file
+*.lib lfs-binary-file
+*.exe lfs-binary-file
+*.out lfs-binary-file
+*.app lfs-binary-file
+*.ipa lfs-binary-file
+*.ace lfs-binary-file

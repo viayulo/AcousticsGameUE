@@ -1,0 +1,35 @@
+{
+    "FileVersion": 3,
+    "EngineAssociation": "5.1",
+    "Category": "",
+    "Description": "",
+    "Modules": [
+        {
+            "Name": "AcousticsGameUE51",
+            "Type": "Runtime",
+            "LoadingPhase": "Default"
+        }
+    ],
+    "Plugins": [
+        {
+            "Name": "ModelingToolsEditorMode",
+            "Enabled": true,
+            "TargetAllowList": [
+                "Editor"
+            ]
+        },
+        {
+            "Name": "Metasound",
+            "Enabled": true
+        },
+        {
+            "Name": "ResonanceAudio",
+            "Enabled": false
+        },
+        {
+            "Name": "ProjectAcoustics",
+            "Enabled": true,
+            "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/06cfe91228c04848a0f6d6f7fb7b40f0"
+        }
+    ]
+}

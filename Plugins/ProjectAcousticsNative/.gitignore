@@ -1,0 +1,13 @@
+Binaries/*
+Intermediate/*
+
+Config/*
+!Config/FilterPlugin.ini
+
+!Content/
+!Content/**
+
+!Source/ThirdParty/
+!Source/ThirdParty/**
+
+__pycache__/
