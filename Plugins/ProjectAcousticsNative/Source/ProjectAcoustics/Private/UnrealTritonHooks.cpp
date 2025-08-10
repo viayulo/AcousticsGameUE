@@ -238,8 +238,6 @@ namespace TritonRuntime
             // recurse, this time cache will be hit
             return Read(readOffset, destBuffer, bytesToRead);
         }
-
-        return -1;
     }
 
     int64 FCachedSyncDiskReader::GetBytesRead() const

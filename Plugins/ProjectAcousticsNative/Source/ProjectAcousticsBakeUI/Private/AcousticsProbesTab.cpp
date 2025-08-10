@@ -56,6 +56,7 @@
 #include "Widgets/Input/SCheckBox.h"
 #include "Widgets/Notifications/SErrorText.h"
 #include "Misc/ScopedSlowTask.h"
+#include "AcousticsShared.h"
 
 #define LOCTEXT_NAMESPACE "SAcousticsProbesTab"
 
@@ -519,7 +520,7 @@ FReply SAcousticsProbesTab::OnCalculateClearButton()
             auto created = FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree(*config.content_dir);
             if (!created)
             {
-                auto error = TEXT("Could not create acoustics data folder. Please choose a new location");
+                FString error{ TEXT("Could not create acoustics data folder. Please choose a new location") };
                 UE_LOG(LogAcoustics, Error, TEXT("%s"), *error);
                 m_OwnerEdit->SetError(error);
                 return FReply::Handled();
@@ -527,7 +528,7 @@ FReply SAcousticsProbesTab::OnCalculateClearButton()
         }
         if (config.content_dir.IsEmpty())
         {
-            auto error = TEXT("Please specify an acoustics data folder");
+            FString error{ TEXT("Please specify an acoustics data folder") };
             UE_LOG(LogAcoustics, Error, TEXT("%s"), *error);
             m_OwnerEdit->SetError(error);
         }
@@ -726,7 +727,7 @@ UStaticMesh* ExtractStaticMeshFromNavigationMesh(const ARecastNavMesh* navMeshAc
 #if ENGINE_MAJOR_VERSION == 4 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 1)
     navMeshActor->GetDebugGeometry(geom);
 #else
-    navMeshActor->GetDebugGeometryForTile(geom, INDEX_NONE);
+    navMeshActor->GetDebugGeometryForTile(geom, FNavTileRef());
 #endif
 
     // Collect all the vertices

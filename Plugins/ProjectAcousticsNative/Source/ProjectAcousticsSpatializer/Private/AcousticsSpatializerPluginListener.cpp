@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 #include "AcousticsSpatializerPluginListener.h"
 #include "AudioDevice.h"
+#include "Engine/World.h"
 
 FAcousticsSpatializerPluginListener::FAcousticsSpatializerPluginListener()
     : m_IsInitialized(false),
@@ -69,7 +70,7 @@ void FAcousticsSpatializerPluginListener::OnListenerShutdown(FAudioDevice* Audio
     {
         m_ProjectAcousticsModule->UnregisterAudioDevice(AudioDevice);
     }
-    
+
     m_IsInitialized = false;
     m_ProjectAcousticsModule = nullptr;
     m_ReverbPtr = nullptr;

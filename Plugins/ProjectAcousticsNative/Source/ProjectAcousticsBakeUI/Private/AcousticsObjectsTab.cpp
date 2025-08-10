@@ -18,6 +18,7 @@
 #include "Misc/ConfigCacheIni.h"
 #include "SourceControlHelpers.h"
 #include "Interfaces/IPluginManager.h"
+#include "AcousticsShared.h"
 
 #define LOCTEXT_NAMESPACE "SAcousticsObjectsTab"
 
@@ -100,7 +101,7 @@ void SAcousticsObjectsTab::Construct(const FArguments& InArgs, SAcousticsEdit* o
                     .Padding(FAcousticsEditSharedProperties::StandardPadding)
                     [
                         SNew(SWrapBox)
-                        .UseAllottedWidth(true)
+                        .UseAllottedSize(true)
                         .InnerSlotPadding({ 6, 5 })
 
                         +SWrapBox::Slot()
@@ -171,7 +172,7 @@ void SAcousticsObjectsTab::Construct(const FArguments& InArgs, SAcousticsEdit* o
                     .Padding(FAcousticsEditSharedProperties::StandardPadding)
                     [
                         SNew(SWrapBox)
-                        .UseAllottedWidth(true)
+                        .UseAllottedSize(true)
                         .InnerSlotPadding({ 6, 5 })
 
                         + SWrapBox::Slot()
@@ -200,7 +201,7 @@ void SAcousticsObjectsTab::Construct(const FArguments& InArgs, SAcousticsEdit* o
                 .AutoHeight()
                 [
                     SNew(SWrapBox)
-                    .UseAllottedWidth(true)
+                    .UseAllottedSize(true)
 
                     // Select all instances
                     +SWrapBox::Slot()
@@ -269,7 +270,7 @@ void SAcousticsObjectsTab::Construct(const FArguments& InArgs, SAcousticsEdit* o
         [
             // Geometry Tag
             SNew(SWrapBox)
-            .UseAllottedWidth(true)
+            .UseAllottedSize(true)
             +SWrapBox::Slot()
             .Padding(FAcousticsEditSharedProperties::StandardPadding * FMargin(0.f, 0.f, 1.f, 0.f))
             [
@@ -311,7 +312,7 @@ void SAcousticsObjectsTab::Construct(const FArguments& InArgs, SAcousticsEdit* o
         [
             // Add Tag
             SNew(SWrapBox)
-            .UseAllottedWidth(true)
+            .UseAllottedSize(true)
             +SWrapBox::Slot()
             .Padding(FAcousticsEditSharedProperties::StandardPadding * FMargin(0.f, 0.f, 1.f, 0.f))
             [
@@ -384,7 +385,7 @@ void SAcousticsObjectsTab::Construct(const FArguments& InArgs, SAcousticsEdit* o
             .AutoWrapText(true)
             .Text_Lambda([this]() { return FText::FromString(m_NumNav); })
         ]
-		
+
 		// Added a check box for physical material support.
 		+ SVerticalBox::Slot()
 		.AutoHeight()

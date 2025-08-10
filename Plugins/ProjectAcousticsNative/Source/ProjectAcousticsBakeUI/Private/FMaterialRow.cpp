@@ -79,7 +79,7 @@ TSharedRef<SWidget> FMaterialRow::GenerateWidgetForColumn(const FName& Column)
                     .SliderExponent(3)
                     .SliderExponentNeutralValue(0.02)
                     .Delta(0.01f)
-                    .ShiftMouseMovePixelPerDelta(5)
+                    .ShiftMultiplier(5)
                     .OnValueChanged(this, &FMaterialRow::SetAbsorptionValue)
                     .OnValueCommitted(this, &FMaterialRow::UpdateFinalAbsorptionValue)
             ];

@@ -5,7 +5,7 @@
 
 #include "TritonHooks.h"
 #include "Async/AsyncFileHandle.h"
-#include "Stats/Stats2.h"
+#include "Stats/Stats.h"
 #include "IAcoustics.h"
 
 namespace TritonRuntime

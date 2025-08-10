@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 #include "AcousticsSourceDataOverrideSettings.h"
+#include "ProjectAcousticsLogChannels.h"
 
 UAcousticsSourceDataOverrideSettings::UAcousticsSourceDataOverrideSettings() :
     ReverbBusesPreset(EReverbBusesPreset::Default)
@@ -182,8 +183,8 @@ bool UAcousticsSourceDataOverrideSettings::CanEditChange(const FProperty* InProp
         InProperty->GetFName() == GET_MEMBER_NAME_CHECKED(UAcousticsSourceDataOverrideSettings, LongReverbLength))
     {
         // Only allow the reverb bus fields to be editable if using Custom preset and using stereo convolution reverb
-        return ParentVal && 
-            (ReverbBusesPreset == EReverbBusesPreset::Custom) && 
+        return ParentVal &&
+            (ReverbBusesPreset == EReverbBusesPreset::Custom) &&
             (ReverbType == EAcousticsReverbType::StereoConvolution);
     }
     else if (

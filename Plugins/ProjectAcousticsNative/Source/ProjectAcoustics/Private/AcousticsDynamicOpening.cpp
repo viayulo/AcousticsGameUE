@@ -13,6 +13,7 @@
 #include "Math/ConvexHull2d.h"
 #endif
 #include "Engine/StaticMesh.h"
+#include "Engine/World.h"
 
 UAcousticsDynamicOpening::UAcousticsDynamicOpening(const class FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)

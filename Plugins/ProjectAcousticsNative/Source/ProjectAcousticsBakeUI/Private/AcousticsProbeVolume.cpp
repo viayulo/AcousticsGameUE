@@ -4,6 +4,7 @@
 #include "AcousticsProbeVolume.h"
 #include "Runtime/Launch/Resources/Version.h"
 #include "AcousticsEdMode.h"
+#include "AcousticsShared.h"
 
 const FString AAcousticsProbeVolume::RemapMaterialNamePrefix = "Remap_";
 const FString AAcousticsProbeVolume::OverrideMaterialNamePrefix = "Override_";

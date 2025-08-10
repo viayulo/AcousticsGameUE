@@ -85,8 +85,8 @@ struct FProbeSampling
 
     /**
     * Minimum horizontal distance allowed between probes in centimeters.
-    * 
-    * This should be modified with care and not made very large. For example, you could perhaps increase 
+    *
+    * This should be modified with care and not made very large. For example, you could perhaps increase
     * this to 100cm if you are confident that your map will be lacking narrower features that the player can walk through.
     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, NonTransactional, Transient, Category = "Acoustics", meta =
@@ -95,9 +95,9 @@ struct FProbeSampling
 
     /**
     * Maximum horizontal distance allowed between probes in centimeters.
-    * 
-    * This is the primary control for bake cost and data size, both of which scale linearly with  
-    * number of probes; each probe yields a simulation task, whose data is concatenated in 
+    *
+    * This is the primary control for bake cost and data size, both of which scale linearly with
+    * number of probes; each probe yields a simulation task, whose data is concatenated in
     * the final ACE file. We have tested this parameter increased to ~10m in big outdoor areas.
     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, NonTransactional, Transient, Category = "Acoustics", meta =
@@ -113,7 +113,7 @@ struct FProbeSampling
 
     /**
     * Minimum distance from the ground at which probes should be placed in centimeters
-    * 
+    *
     * This is typically chosen to range around human height, but if you are say, modeling a mech, this can be increased correspondingly.
     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, NonTransactional, Transient, Category = "Acoustics", meta =
@@ -127,15 +127,15 @@ struct FSimulationParameters
     GENERATED_BODY()
 
     /**
-    * Multiplicative adjustment to scale the mesh's unit system to meters. This applies in addition to the automatic 
+    * Multiplicative adjustment to scale the mesh's unit system to meters. This applies in addition to the automatic
     * conversion from Unreal performed by PA.
     */
     UPROPERTY(BlueprintReadWrite, NonTransactional, Transient, Category = "Acoustics", meta =
         (ClampMin = 0, UIMin = 0, DisplayName = "Mesh Unit Adjustment"))
     float mesh_unit_adjustment = 0.0f;
 
-    /** 
-    * This is the top frequency in Hertz used for wave simulation. It is used to determine the voxel resolution. For a value of 
+    /**
+    * This is the top frequency in Hertz used for wave simulation. It is used to determine the voxel resolution. For a value of
     * 500Hz, the voxel size is 25 centimeters, with linear scaling. That is, at 250Hz, the voxel size is 51cm and so on. This is
     * also a factor in determing when the simulation terminates.
     */
@@ -145,7 +145,7 @@ struct FSimulationParameters
 
     /**
     * Sampling resolution of parameter field in centimeters
-    * 
+    *
     * For each probe, the volumetric simulated data is sampled on a regularly-spaced 3D grid. This is the spacing of that grid, which
     * is internally discretized to an integer number of simulation voxels. It is the spatial resolution of acoustic interpolation for
     * sound sources at runtime.
@@ -161,10 +161,10 @@ struct FSimulationParameters
 
     /**
     * These settings inform the global adaptive probe placement algorithm. The algorithm adapts the probe spacing based on how cramped or
-    * open the surroundings are in various regions of the map. The rails on these resolution variations are provided by 
-    * HorizontalSpacingMin and HorizontalSpacingMax respectively. Set the former based on the most cramped areas such as width of narrow 
-    * corridors you wish to resolve. Set the latter based on how coarse you can go in wide open areas. Vertically, the layout algorithm will 
-    * create a single layer of probes that are within the height range (ProbeMinHeightAboveGround, ProbeMinHeightAboveGround + VerticalSpacing) 
+    * open the surroundings are in various regions of the map. The rails on these resolution variations are provided by
+    * HorizontalSpacingMin and HorizontalSpacingMax respectively. Set the former based on the most cramped areas such as width of narrow
+    * corridors you wish to resolve. Set the latter based on how coarse you can go in wide open areas. Vertically, the layout algorithm will
+    * create a single layer of probes that are within the height range (ProbeMinHeightAboveGround, ProbeMinHeightAboveGround + VerticalSpacing)
     * above the nav mesh.
     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, NonTransactional, Transient, Category = "Acoustics", meta =
@@ -173,9 +173,9 @@ struct FSimulationParameters
 
     /**
     * Bounding box to control simulation region around a probe (in centimeters).
-    * 
-    * Each probe performs a simulation on a limited volume of space. Thus runtime sources' acoustics are accurately modeled only up to some 
-    * distance. Beyond this distance, the runtime extrapolates assuming that everything is air. The "Min" and "Max" values specify the corners 
+    *
+    * Each probe performs a simulation on a limited volume of space. Thus runtime sources' acoustics are accurately modeled only up to some
+    * distance. Beyond this distance, the runtime extrapolates assuming that everything is air. The "Min" and "Max" values specify the corners
     * of this simulation box, relative to the probe location
     */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, NonTransactional, Transient, Category = "Acoustics", meta =

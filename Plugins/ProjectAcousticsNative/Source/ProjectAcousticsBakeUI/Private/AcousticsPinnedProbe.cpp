@@ -7,6 +7,7 @@
 #include "AcousticsEdMode.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
+#include "AcousticsShared.h"
 
 AAcousticsPinnedProbe::AAcousticsPinnedProbe(const class FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)

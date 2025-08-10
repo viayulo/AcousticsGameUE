@@ -4,6 +4,7 @@
 #include "AcousticsSourceDataOverride.h"
 #include "IAcoustics.h"
 #include "Engine/World.h"
+#include "Engine/OverlapResult.h"
 #include "MathUtils.h"
 #include "AcousticsSourceDataOverrideSettings.h"
 #include "Sound/SoundEffectSubmix.h"
@@ -15,8 +16,7 @@
 #include "AcousticsSourceBufferListener.h"
 #include "AcousticsAudioComponent.h"
 #include "Components/AudioComponent.h"
-
-DEFINE_LOG_CATEGORY(LogAcousticsNative)
+#include "ProjectAcousticsLogChannels.h"
 
 FAcousticsSourceDataOverride::FAcousticsSourceDataOverride()
     : m_Acoustics(nullptr)

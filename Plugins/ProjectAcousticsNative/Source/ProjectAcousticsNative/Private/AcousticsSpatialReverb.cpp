@@ -6,8 +6,9 @@
 #include "MathUtils.h"
 #include "AudioMixerDevice.h"
 #include "DSP/FloatArrayMath.h"
+#include "ProjectAcousticsLogChannels.h"
 
-FAcousticsSpatialReverb::FAcousticsSpatialReverb() : 
+FAcousticsSpatialReverb::FAcousticsSpatialReverb() :
     m_HrtfFrameCount(0)
     , m_MaxSources(0)
     , m_QualitySetting(ESpatialReverbQuality::Best)
@@ -58,7 +59,7 @@ bool FAcousticsSpatialReverb::Initialize(
     return m_IsInitialized;
 }
 
-void FAcousticsSpatialReverb::OnInitSource(const uint32 SourceId, const FName& /*AudioComponentUserId*/, USourceDataOverridePluginSourceSettingsBase* InSettings)
+void FAcousticsSpatialReverb::OnInitSource(const uint32 SourceId, const FName& AudioComponentUserId, USourceDataOverridePluginSourceSettingsBase* InSettings)
 {
     if (!m_IsInitialized)
     {
@@ -96,7 +97,7 @@ bool FAcousticsSpatialReverb::SaveOutputChannels()
     m_OutputChannelDirections.SetNum(m_NumOutputChannels);
     for (auto i = 0u; i < m_NumOutputChannels; i++)
     {
-        // Convert from Hrtf to Unreal transform, and place 1 meter away. 
+        // Convert from Hrtf to Unreal transform, and place 1 meter away.
         // Hrtf gives directions as unit vectors, so convert from Hrtf units (cm) to UE units (m) to place 1m away
         m_OutputChannelDirections[i] =
             AcousticsUtils::HrtfEngineDirectionToUnreal(AcousticsUtils::ToFVector(hrtfOutputDirections[i])) *

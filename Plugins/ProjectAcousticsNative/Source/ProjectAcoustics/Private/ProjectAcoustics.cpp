@@ -5,6 +5,7 @@
 #include "ProjectAcoustics.h"
 #include "IAcoustics.h"
 #include "AcousticsDebugRender.h"
+#include "Misc/Paths.h"
 
 using namespace TritonRuntime;
 
@@ -263,7 +264,7 @@ void FProjectAcousticsModule::SetSpaceTransform(const FTransform& newTransform)
 }
 
 AcousticQueryResults FProjectAcousticsModule::GetAcousticQueryResults(
-    const uint64_t sourceObjectId, const FVector& sourceLocation, const FVector& listenerLocation, 
+    const uint64_t sourceObjectId, const FVector& sourceLocation, const FVector& listenerLocation,
     AcousticsObjectParams objectParams)
 {
     UpdateOutdoorness(listenerLocation);
@@ -305,7 +306,7 @@ void FProjectAcousticsModule::RegisterSourceObject(const uint64_t sourceObjectId
         // There could be an old query running that hasn't finished. Attempt to retract it
         auto retracted = m_ThreadPool->RetractQueuedWork(result.QueuedWork.Get());
 
-        // If retraction fails, it could be because the task is running. Setting RetractionRequested to true 
+        // If retraction fails, it could be because the task is running. Setting RetractionRequested to true
         // to indicate to the running task not to store its irrelevant results.
         result.RetractionRequested = true;
 
@@ -340,10 +341,10 @@ void FProjectAcousticsModule::UnregisterSourceObject(const uint64_t sourceObject
             auto retracted = m_ThreadPool->RetractQueuedWork(queuedWorkPtr);
             auto isQueuedOrRunning = FPlatformAtomics::AtomicRead(&queuedWorkPtr->m_IsQueuedOrRunning);
 
-            // If retraction fails, it could be because the task is running. Setting RetractionRequested to true 
+            // If retraction fails, it could be because the task is running. Setting RetractionRequested to true
             // to indicate to the running task not to store its irrelevant results.
             queryObject.RetractionRequested = true;
-            
+
             if (retracted || (isQueuedOrRunning == 0))
             {
                 if (retracted)
@@ -502,7 +503,7 @@ bool FProjectAcousticsModule::UpdateObjectParameters(
         m_AcousticQueryResultMapLock.Lock();
         AsyncAcousticQueryResults& result = m_AcousticQueryResultMap.FindOrAdd(sourceObjectId);
 
-        // If the last query is still running, we don't want to schedule a new one and fall behind. Skip the 
+        // If the last query is still running, we don't want to schedule a new one and fall behind. Skip the
         // scheduling, and try again next pass.
         auto queryStillRunning =
             result.QueuedWork.IsValid() ? FPlatformAtomics::AtomicRead(&result.QueuedWork->m_IsQueuedOrRunning) : 0;
@@ -532,7 +533,7 @@ bool FProjectAcousticsModule::UpdateObjectParameters(
             sourceObjectId, sourceLocation, listenerLocation, querySuccess, objectParams, queryDebugInfo);
         int  NumMessages;
         const TritonRuntime::QueryDebugInfo::DebugMessage* Messages = queryDebugInfo.GetMessageList(NumMessages);
-        UE_LOG(LogAcousticsRuntime, Verbose, TEXT("%s : Query for ObjID[%llu] at [%.2f, %.2f, %.2f] failed with %d messages:"), 
+        UE_LOG(LogAcousticsRuntime, Verbose, TEXT("%s : Query for ObjID[%llu] at [%.2f, %.2f, %.2f] failed with %d messages:"),
             ANSI_TO_TCHAR(__FUNCTION__),
             sourceObjectId,
             sourceLocation.X,

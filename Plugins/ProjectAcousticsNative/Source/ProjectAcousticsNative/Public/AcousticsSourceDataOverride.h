@@ -10,8 +10,6 @@
 #include "AcousticsSourceDataOverrideSourceSettings.h"
 #include "AcousticsSourceDataOverrideSettings.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogAcousticsNative, Log, All);
-
 class FAcousticsSourceDataOverride : public IAudioSourceDataOverride
 {
 public:

@@ -168,7 +168,7 @@ void SAcousticsBakeTab::Construct(const FArguments& InArgs, SAcousticsEdit* owne
                     .AutoHeight()
                     [
                         SNew(SWrapBox)
-                        .UseAllottedWidth(true)
+                        .UseAllottedSize(true)
 
                         + SWrapBox::Slot()
                         .Padding(FAcousticsEditSharedProperties::StandardPadding)
@@ -334,7 +334,7 @@ FReply SAcousticsBakeTab::OnLocalBakeButton()
         UE_LOG(LogAcoustics, Display, TEXT(".ace file into the folder -or- select the Import button and select the .ace file that you would like to import"));
         UE_LOG(LogAcoustics, Display, TEXT("into the project. Once the import is complete, you can then set the Acoustics Data property of the "));
         UE_LOG(LogAcoustics, Display, TEXT("AcousticsSpace actor to new .ace file."));
-        
+
         // Notify the user with notification
         FNotificationInfo Info(FText::Format(LOCTEXT("Local bake package prepared", "{0}"), FText::FromString(directoryMsg)));
         Info.ExpireDuration = 8.0f;

@@ -8,6 +8,8 @@
 #include "AcousticsParameterInterface.h"
 #include "AcousticsAudioPluginListener.h"
 #include "Interfaces/IPluginManager.h"
+#include "Misc/Paths.h"
+#include "ProjectAcousticsLogChannels.h"
 
 #define LOCTEXT_NAMESPACE "FProjectAcousticsNativeModule"
 
@@ -81,8 +83,8 @@ void FProjectAcousticsNativeModule::StartupModule()
     // unnecessary to pre-load the library on Android
 #else
     UE_LOG(
-        LogAcousticsNative, 
-        Error, 
+        LogAcousticsNative,
+        Error,
         TEXT("Unsupported Platform. Supported platforms are WINDOWS and ANDROID"));
     return;
 #endif

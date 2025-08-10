@@ -3,8 +3,9 @@
 
 #include "AcousticsSpace.h"
 #include "IAcoustics.h"
-#include <Classes/GameFramework/HUD.h>
-#include <Classes/GameFramework/PlayerController.h>
+#include "Engine/World.h"
+#include "GameFramework/HUD.h"
+#include "GameFramework/PlayerController.h"
 
 // Console commands for toggling debug info
 static TAutoConsoleVariable<int32>

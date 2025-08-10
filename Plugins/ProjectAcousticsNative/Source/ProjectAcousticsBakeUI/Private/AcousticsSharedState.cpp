@@ -15,6 +15,7 @@
 #include "Misc/MessageDialog.h"
 #include "MathUtils.h"
 #include "AcousticsShared.h"
+#include "AcousticsEdMode.h"
 
 UAcousticsPythonBridge* AcousticsSharedState::m_PythonBridge = nullptr;
 TUniquePtr<AcousticsMaterialLibrary> AcousticsSharedState::m_MaterialLibrary;
@@ -136,8 +137,8 @@ const TritonSimulationParameters AcousticsSharedState::GetTritonSimulationParame
     params.SceneScale = 1.0f;
     params.SpeedOfSound = c_SpeedOfSound;
     params.ReceiverSampleSpacing = AcousticsUtils::UnrealValToTriton(simulation_config.receiver_spacing);
-    auto tritonVectorFromUnreal = [](const FVector& uv) 
-    { 
+    auto tritonVectorFromUnreal = [](const FVector& uv)
+    {
         return ATKVectorD{
             AcousticsUtils::UnrealValToTriton(uv.X),
             AcousticsUtils::UnrealValToTriton(uv.Y),
@@ -238,7 +239,7 @@ void AcousticsSharedState::SetSimulationConfiguration(TUniquePtr<AcousticsSimula
         // Don't need the debug renderer anymore. Remove it
         if (m_DebugRenderer.IsValid())
         {
-            // Remove the shared reference to SimConfig the DebugRenderer holds. Then SimConfig can be 
+            // Remove the shared reference to SimConfig the DebugRenderer holds. Then SimConfig can be
             // properly destroyed
             m_DebugRenderer->SetConfiguration(nullptr);
             m_DebugRenderer->Destroy();

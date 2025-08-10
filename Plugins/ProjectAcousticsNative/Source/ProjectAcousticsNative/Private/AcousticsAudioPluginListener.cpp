@@ -4,12 +4,13 @@
 #include "AcousticsSourceDataOverride.h"
 #include "AcousticsVirtualSpeaker.h"
 #include "AudioDevice.h"
+#include "Engine/World.h"
+#include "ProjectAcousticsLogChannels.h"
 
 FAcousticsAudioPluginListener::FAcousticsAudioPluginListener()
     : m_AcousticsNativeAudioModule(nullptr)
     , m_NumVirtualSpeakers(0)
     , m_IsInitialized(false)
-
 {
 }
 

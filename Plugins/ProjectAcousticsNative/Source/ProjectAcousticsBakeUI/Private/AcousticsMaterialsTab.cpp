@@ -30,6 +30,7 @@
 #if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 2
 #include "MaterialDomain.h" // For MD_Surface
 #endif
+#include "AcousticsShared.h"
 
 #define LOCTEXT_NAMESPACE "SAcousticsBakeTab"
 
@@ -85,7 +86,6 @@ void SAcousticsMaterialsTab::Construct(const FArguments& InArgs)
             .VAlign(VAlign_Fill)
             [
                 SAssignNew(m_ListView, SListView< TSharedPtr<MaterialItem> >)
-                .ItemHeight(24)
                 .ListItemsSource(&m_Items)
                 .OnGenerateRow(this, &SAcousticsMaterialsTab::OnGenerateRowForMaterialList)
                 .SelectionMode(ESelectionMode::SingleToggle)
@@ -286,10 +286,10 @@ void SAcousticsMaterialsTab::UpdateUEMaterials()
             else
             {
                 // Add the layers or their associated physical material to the materials tab list.
-                TArray<FLandscapeEditorLayerSettings> EditorLayerSettings = landscape->EditorLayerSettings;
-                if (EditorLayerSettings.Num())
+                const auto& EditorLayerSettings = landscape->GetTargetLayers();
+                if (!EditorLayerSettings.IsEmpty())
                 {
-                    for (const FLandscapeEditorLayerSettings& LayerSettings : EditorLayerSettings)
+                    for (const auto& [LayerName, LayerSettings] : EditorLayerSettings)
                     {
                         ULandscapeLayerInfoObject* LayerInfo = LayerSettings.LayerInfoObj;
                         if (LayerInfo != nullptr)
@@ -375,11 +375,11 @@ void SAcousticsMaterialsTab::AddNewUEMaterial(FString materialName)
                 // If the serialization data is bad, clear it out
                 // Remove the invalid serialized material data from the base ini file instead of the generated config
                 // file.
-                FConfigSection* MaterialsSection = BaseProjectAcousticsConfigFile->Find(c_ConfigSectionMaterials);
+                const FConfigSection* MaterialsSection = BaseProjectAcousticsConfigFile->FindSection(c_ConfigSectionMaterials);
                 if (MaterialsSection)
                 {
-                    MaterialsSection->Remove(*materialName);
-                    if (MaterialsSection->Num() == 0)
+                    BaseProjectAcousticsConfigFile->RemoveKeyFromSection(*c_ConfigSectionMaterials, *materialName);
+                    if (MaterialsSection->IsEmpty())
                     {
                         BaseProjectAcousticsConfigFile->Remove(c_ConfigSectionMaterials);
                     }
@@ -562,7 +562,7 @@ void SAcousticsMaterialsTab::OnRowSelectionChanged(TSharedPtr<MaterialItem> InIt
                 else
                 {
                     // Select landscape based on physical material on lanscape material layers.
-                    for (const auto& LayerSettings : landscape->EditorLayerSettings)
+                    for (const auto& [LayerName, LayerSettings] : landscape->GetTargetLayers())
                     {
                         if ((m_AcousticsEditMode->ShouldUsePhysicalMaterial(LayerSettings.LayerInfoObj->PhysMaterial) &&
                              LayerSettings.LayerInfoObj->PhysMaterial->GetName() == InItem->UEMaterialName) ||

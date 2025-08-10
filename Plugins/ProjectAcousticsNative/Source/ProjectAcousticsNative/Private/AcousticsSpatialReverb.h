@@ -7,6 +7,9 @@
 #include "DSP/MultichannelBuffer.h"
 #include "DSP/DeinterleaveView.h"
 
+class USourceDataOverridePluginSourceSettingsBase;
+struct FAudioPluginInitializationParams;
+
 /**
  * Maintains connection to HrtfEngine, stores the input and output buffers in between frames and sources, and kicks off
  * the DSP processing
