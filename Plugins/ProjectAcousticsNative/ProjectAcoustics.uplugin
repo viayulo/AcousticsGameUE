@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 6,
-	"VersionName": "2022.1.426+community.1",
+	"VersionName": "2022.1.426+community.2",
 	"FriendlyName": "Project Acoustics for Unreal Audio",
 	"Description": "Sound propagation design using accurate wave physics. Performs per-source processing of acoustic parameters and renders using native Unreal Audio. Implements Unreal's Source Data Override audio extension.",
 	"Category": "Audio",

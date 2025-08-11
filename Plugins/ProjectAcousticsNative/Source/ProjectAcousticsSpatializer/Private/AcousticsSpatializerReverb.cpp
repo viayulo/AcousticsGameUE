@@ -20,7 +20,7 @@ TAudioReverbPtr FReverbPluginFactory::CreateNewReverbPlugin(FAudioDevice* Owning
     return TAudioReverbPtr(new FAcousticsSpatializerReverb());
 }
 
-FAcousticsSpatializerReverb::FAcousticsSpatializerReverb() 
+FAcousticsSpatializerReverb::FAcousticsSpatializerReverb()
     : m_ReverbSubmix(nullptr), m_SubmixEffect(nullptr)
 {
 }
@@ -53,7 +53,7 @@ void FAcousticsSpatializerReverb::ProcessMixedAudio(const FSoundEffectSubmixInpu
         Audio::FAlignedFloatBuffer outputBuffer = m_AcousticsSpatializerPlugin->GetHrtfOutputBuffer();
         uint32_t outputBufferLength = m_AcousticsSpatializerPlugin->GetHrtfOutputBufferLength();
 
-        if (OutData.NumChannels == 2) 
+        if (OutData.NumChannels == 2)
         {
             // copy the dry path
             FMemory::Memcpy(OutData.AudioBuffer->GetData(), outputBuffer.GetData(), outputBufferLength * sizeof(float));
@@ -61,17 +61,17 @@ void FAcousticsSpatializerReverb::ProcessMixedAudio(const FSoundEffectSubmixInpu
         else if (OutData.NumChannels > 2)
         {
             // If the output buffer has more than 2 channels we copy the HRTF-processed signal into the first 2 channels
-            Audio::TAutoDeinterleaveView<float, Audio::FAudioBufferAlignedAllocator> DeinterleaveViewOutput(*OutData.AudioBuffer, m_ScratchBufferOutput, OutData.NumChannels);
             Audio::TAutoDeinterleaveView<float, Audio::FAudioBufferAlignedAllocator> DeinterleaveViewHrtf(outputBuffer, m_ScratchBufferHrtf, 2);
+            float* OutputBufferPtr = OutData.AudioBuffer->GetData();
 
-            for (auto OutputChannel : DeinterleaveViewOutput)
+            for (auto HrtfChannel : DeinterleaveViewHrtf)
             {
-                for (auto HrtfChannel : DeinterleaveViewHrtf)
+                auto inData = HrtfChannel.Values.GetData();
+                auto inDataCount = HrtfChannel.Values.Num();
+                for (int32 i = 0; i < inDataCount; ++i)
                 {
-                    if (HrtfChannel.ChannelIndex == OutputChannel.ChannelIndex)
-                    {
-                        FMemory::Memcpy(OutputChannel.Values.GetData(), HrtfChannel.Values.GetData(), outputBufferLength * sizeof(float));
-                    }
+                    const int32 output_offset = i * OutData.NumChannels + HrtfChannel.ChannelIndex;
+                    OutputBufferPtr[output_offset] = inData[i];
                 }
             }
         }
@@ -142,7 +142,7 @@ FSoundEffectSubmixPtr FAcousticsSpatializerReverb::GetEffectSubmix()
 
         if (ensure(m_SubmixEffect.IsValid()))
         {
-            // connect reverb plugin processing method ::ProcessMixedAudio to submix processing chain 
+            // connect reverb plugin processing method ::ProcessMixedAudio to submix processing chain
             StaticCastSharedPtr<FAcousticsSpatializerReverbSubmix, FSoundEffectSubmix, ESPMode::ThreadSafe>(m_SubmixEffect)->SetAcousticsReverbPlugin(this);
             m_SubmixEffect->SetEnabled(true);
         }
