@@ -6,6 +6,7 @@
 #include "IAcoustics.h"
 #include "AcousticsDebugRender.h"
 #include "Misc/Paths.h"
+#include "Logging/StructuredLog.h"
 
 using namespace TritonRuntime;
 
@@ -542,7 +543,7 @@ bool FProjectAcousticsModule::UpdateObjectParameters(
             NumMessages);
         for (int i=0; i<NumMessages; i++)
         {
-            UE_LOG(LogAcousticsRuntime, Verbose, TEXT("  %s"), Messages[i].MessageString);
+            UE_LOGFMT(LogAcousticsRuntime, Verbose, "  {0}", Messages[i].MessageString);
         }
         return false;
     }
