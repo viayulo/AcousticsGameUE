@@ -9,7 +9,7 @@
 #include "AcousticsAudioComponent.generated.h"
 
 // AcousticsAudioComponent is a normal Unreal AudioComponent that plays sound
-// with additional per-source settings for Project Acoustics. These per-source 
+// with additional per-source settings for Project Acoustics. These per-source
 // settings will overwrite any settings from the Project Acoustics Source
 // Data Override Source Settings
 UCLASS(
@@ -18,9 +18,10 @@ UCLASS(
     meta = (BlueprintSpawnableComponent))
 class PROJECTACOUSTICSNATIVE_API UAcousticsAudioComponent : public UAudioComponent
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
 public:
+    UAcousticsAudioComponent(const FObjectInitializer& ObjectInitializer);
 
     // The per-source settings for this AcousticsAudioComponent
     UPROPERTY(

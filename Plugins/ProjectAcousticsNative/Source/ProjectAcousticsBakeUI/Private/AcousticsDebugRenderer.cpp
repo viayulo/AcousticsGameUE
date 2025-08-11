@@ -5,7 +5,7 @@
 #include "EditorViewportClient.h"
 #include "Editor.h"
 
-AAcousticsDebugRenderer::AAcousticsDebugRenderer(const class FObjectInitializer& ObjectInitializer)
+AAcousticsDebugRenderer::AAcousticsDebugRenderer(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     PrimaryActorTick.bCanEverTick = true;

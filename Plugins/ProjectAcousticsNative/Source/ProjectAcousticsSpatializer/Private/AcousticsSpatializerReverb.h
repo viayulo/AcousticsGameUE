@@ -18,12 +18,12 @@ class FAcousticsSpatializer;
 // 1. the Reverb plugin itself which orchestrates the signal flow
 // 2. the Submix object which is the holder of an effects chain
 // 3. the SubmixEffect object which registered to generate or modify audio within the audio graph
-// 
-// The Reverb plugin will ensure that a valid submix object is either loaded from the Content folder or created as 
+//
+// The Reverb plugin will ensure that a valid submix object is either loaded from the Content folder or created as
 // a fresh instance if the preset asset is not present in the project
 // Once the Submix asset is instantiated, a submix effect is created in order to hook into the flow of audio data
-// Upon a ProcessAudio call to the submix effect, the OutData buffer is forwarded to a ::ProcessMixedAudio routine 
-// in the FAcousticsSpatializerReverb class. 
+// Upon a ProcessAudio call to the submix effect, the OutData buffer is forwarded to a ::ProcessMixedAudio routine
+// in the FAcousticsSpatializerReverb class.
 
 class FAcousticsSpatializerReverb : public IAudioReverb
 {
@@ -47,7 +47,7 @@ private:
 
     // the ReverbSubmix is the holder for a effects processing chain that is hosted by the Reverb plugin
     TWeakObjectPtr<USoundSubmix> m_ReverbSubmix;
-    // the SubmixEffect is an effect that is inserted into a slot of the effects chain for the submix 
+    // the SubmixEffect is an effect that is inserted into a slot of the effects chain for the submix
     // and allows for modifying the outgoing signal.  this effect copies data generated from the spatializer
     // plugin and places that post-processed data into the effects chain for further mixing with the master mixer graph
     FSoundEffectSubmixPtr m_SubmixEffect;
@@ -77,7 +77,7 @@ private:
 USTRUCT(BlueprintType)
 struct FAcousticsSpatializerReverbSubmixSettings
 {
-    GENERATED_USTRUCT_BODY()
+    GENERATED_BODY()
 };
 
 

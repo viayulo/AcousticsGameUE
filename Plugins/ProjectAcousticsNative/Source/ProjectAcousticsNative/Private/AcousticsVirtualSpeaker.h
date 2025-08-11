@@ -11,8 +11,9 @@ class FAcousticsSourceDataOverride;
 USTRUCT(BlueprintType)
 struct FSoundEffectAcousticsVirtualSpeakerSettings
 {
-    GENERATED_USTRUCT_BODY()
+    GENERATED_BODY()
 
+public:
     FSoundEffectAcousticsVirtualSpeakerSettings()
     {
     }

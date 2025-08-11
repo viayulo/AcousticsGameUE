@@ -15,7 +15,7 @@
 #include "Engine/StaticMesh.h"
 #include "DrawDebugHelpers.h"
 
-UAcousticsAudioComponent::UAcousticsAudioComponent(const class FObjectInitializer& ObjectInitializer)
+UAcousticsAudioComponent::UAcousticsAudioComponent(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     Settings.DesignParams = FAcousticsDesignParams::Default();

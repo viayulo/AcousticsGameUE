@@ -12,7 +12,7 @@
 #include "GenericPlatform/GenericPlatformFile.h"
 #include "HAL/PlatformFilemanager.h"
 
-UAcousticsDataFactory::UAcousticsDataFactory(const class FObjectInitializer& ObjectInitializer)
+UAcousticsDataFactory::UAcousticsDataFactory(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     // Property initialization
@@ -56,7 +56,7 @@ UAcousticsDataFactory::UAcousticsDataFactory(const class FObjectInitializer& Obj
                 break;
             }
         }
-        
+
         // Create a rule to ignore ACE files when scanning for files to auto-import
         // if we haven't already
         if (!wildcardCreated)

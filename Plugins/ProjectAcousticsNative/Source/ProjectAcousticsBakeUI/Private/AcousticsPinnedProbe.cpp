@@ -9,7 +9,7 @@
 #include "Engine/StaticMesh.h"
 #include "AcousticsShared.h"
 
-AAcousticsPinnedProbe::AAcousticsPinnedProbe(const class FObjectInitializer& ObjectInitializer)
+AAcousticsPinnedProbe::AAcousticsPinnedProbe(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     bIsEditorOnlyActor = true;

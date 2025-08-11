@@ -10,7 +10,10 @@
 UCLASS(hidecategories = Object)
 class UAcousticsDataFactory : public UFactory, public FReimportHandler
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
+
+public:
+    UAcousticsDataFactory(const FObjectInitializer& ObjectInitializer);
 
     virtual bool FactoryCanImport(const FString& Filename) override;
 

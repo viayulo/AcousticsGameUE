@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 #pragma once
 
-#include "Classes/GameFramework/Actor.h"
+#include "GameFramework/Actor.h"
 #include "Modules/ModuleManager.h"
 #include "AcousticsDesignParams.h"
 #include "AcousticsData.h"
@@ -26,9 +26,11 @@ UCLASS(
     ClassGroup = Acoustics, meta = (BlueprintSpawnableComponent))
 class PROJECTACOUSTICS_API AAcousticsSpace : public AActor
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
 public:
+    AAcousticsSpace(const FObjectInitializer& ObjectInitializer);
+
     /* ACE file to load. ACE files must be located in <project dir>/Content/Acoustics/, however
        the AcousticsData.uasset can be placed anywhere. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Acoustics")

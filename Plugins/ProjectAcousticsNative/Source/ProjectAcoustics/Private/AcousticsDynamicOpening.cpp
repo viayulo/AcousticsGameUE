@@ -15,7 +15,7 @@
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
 
-UAcousticsDynamicOpening::UAcousticsDynamicOpening(const class FObjectInitializer& ObjectInitializer)
+UAcousticsDynamicOpening::UAcousticsDynamicOpening(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     // Component state
@@ -288,7 +288,7 @@ bool UAcousticsDynamicOpening::ComputeCenter(FVector& outCenter)
 {
     if (UpdateOpeningGeometry())
     {
-        // Use the static transform method during baking, instead of transform from 
+        // Use the static transform method during baking, instead of transform from
         // the runtime Triton instance (which accounts for dynamic world origin).
         // The latter does not make sense in editor and m_Acoustics will be null when
         // this function is called.

@@ -5,7 +5,7 @@
 #include "Runtime/Launch/Resources/Version.h"
 #include "Components/BrushComponent.h"
 
-AAcousticsRuntimeVolume::AAcousticsRuntimeVolume(const class FObjectInitializer& ObjectInitializer)
+AAcousticsRuntimeVolume::AAcousticsRuntimeVolume(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     OverrideDesignParams.OcclusionMultiplier = 1.0f;

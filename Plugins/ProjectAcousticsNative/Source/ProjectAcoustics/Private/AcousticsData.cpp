@@ -3,7 +3,7 @@
 
 #include "AcousticsData.h"
 
-UAcousticsData::UAcousticsData(const class FObjectInitializer& ObjectInitializer)
+UAcousticsData::UAcousticsData(const FObjectInitializer& ObjectInitializer)
 {
     UpdateAceFilePath();
 }

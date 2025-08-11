@@ -18,9 +18,11 @@
 UCLASS(ClassGroup = ProjectAcoustics, hidecategories = (Advanced, Attachment), BlueprintType)
 class PROJECTACOUSTICS_API AAcousticsRuntimeVolume : public AVolume
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
 public:
+    AAcousticsRuntimeVolume(const FObjectInitializer& ObjectInitializer);
+
     /**
      *	The design params to override the acoustics audio components found inside this volume.
      */

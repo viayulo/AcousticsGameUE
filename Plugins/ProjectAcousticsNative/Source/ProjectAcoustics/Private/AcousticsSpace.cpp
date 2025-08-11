@@ -22,7 +22,8 @@ static TAutoConsoleVariable<int32> CVarAcousticsShowAllSourceParameters(
          "debug display for all sources, 3: Let the individual source decide whether to show acoustic "
          "parameters debug display\n"));
 
-AAcousticsSpace::AAcousticsSpace(const class FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+AAcousticsSpace::AAcousticsSpace(const FObjectInitializer& ObjectInitializer)
+    : Super(ObjectInitializer)
 {
     PrimaryActorTick.bCanEverTick = true;
     PrimaryActorTick.bStartWithTickEnabled = true;

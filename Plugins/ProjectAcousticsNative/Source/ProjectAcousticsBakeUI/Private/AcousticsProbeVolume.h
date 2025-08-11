@@ -25,9 +25,11 @@ enum class AcousticsVolumeType : uint8
 UCLASS(ClassGroup = ProjectAcoustics, hidecategories = (Advanced, Attachment), BlueprintType)
 class AAcousticsProbeVolume : public AVolume
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
 public:
+    AAcousticsProbeVolume(const FObjectInitializer& ObjectInitializer);
+
     // Defines the type of metadata contained in this volume
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AcousticsVolume)
     AcousticsVolumeType VolumeType;

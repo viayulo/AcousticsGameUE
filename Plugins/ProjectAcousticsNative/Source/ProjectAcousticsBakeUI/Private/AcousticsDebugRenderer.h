@@ -19,20 +19,23 @@ enum class AAFaceDirection
 UCLASS(config = Engine, hidecategories = Auto, BlueprintType, Blueprintable, ClassGroup = ProjectAcoustics)
 class AAcousticsDebugRenderer : public AActor
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Probes"))
+private:
+    AAcousticsDebugRenderer(const FObjectInitializer& ObjectInitializer);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Probes", AllowPrivateAccess = "true"))
     bool ShouldRenderProbes = true;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Voxels"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Voxels", AllowPrivateAccess = "true"))
     bool ShouldRenderVoxels;
 
     // Expose draw distance for voxel
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Voxels Draw Distance"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Voxels Draw Distance", AllowPrivateAccess = "true"))
     float VoxelsDrawDistance = 1000.0f;
 
     // Expose Probes' draw distance
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Probes Draw Distance"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Probes Draw Distance", AllowPrivateAccess = "true"))
     float ProbesDrawDistance = 2000.0f;
 
 public:

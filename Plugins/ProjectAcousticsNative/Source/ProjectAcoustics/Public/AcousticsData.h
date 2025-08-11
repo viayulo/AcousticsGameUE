@@ -2,15 +2,17 @@
 // Licensed under the MIT License.
 #pragma once
 
-#include "Engine/GameEngine.h"
+#include "UObject/Object.h"
 #include "AcousticsData.generated.h"
 
 UCLASS(meta = (BlueprintSpawnableComponent))
 class PROJECTACOUSTICS_API UAcousticsData : public UObject
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
 public:
+    UAcousticsData(const FObjectInitializer& ObjectInitializer);
+
     /** Relative path to the ACE file. The actual ACE file must be manually placed at this location
      *   separate from this uasset, otherwise it may not be packaged as part of the game and the Project
      *   Acoustics runtime will not be able to find it. */

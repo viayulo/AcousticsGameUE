@@ -15,9 +15,11 @@ UCLASS(
     meta = (BlueprintSpawnableComponent))
 class PROJECTACOUSTICS_API UAcousticsDynamicOpening : public UStaticMeshComponent
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
 
 public:
+    UAcousticsDynamicOpening(const FObjectInitializer& ObjectInitializer);
+
     /** Specify dB attenuation on dry audio going through this opening
      */
     UPROPERTY(

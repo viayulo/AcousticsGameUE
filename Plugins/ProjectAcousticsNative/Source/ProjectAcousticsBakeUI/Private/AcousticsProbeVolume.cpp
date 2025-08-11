@@ -9,7 +9,7 @@
 const FString AAcousticsProbeVolume::RemapMaterialNamePrefix = "Remap_";
 const FString AAcousticsProbeVolume::OverrideMaterialNamePrefix = "Override_";
 
-AAcousticsProbeVolume::AAcousticsProbeVolume(const class FObjectInitializer& ObjectInitializer)
+AAcousticsProbeVolume::AAcousticsProbeVolume(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     VolumeType = AcousticsVolumeType::Include;
