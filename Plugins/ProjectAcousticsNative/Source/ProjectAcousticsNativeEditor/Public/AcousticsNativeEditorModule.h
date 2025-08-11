@@ -3,10 +3,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
-#include "Styling/SlateStyleRegistry.h"
-#include "Styling/SlateStyle.h"
 
 class FAcousticsNativeEditorModule : public IModuleInterface
 {

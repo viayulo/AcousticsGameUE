@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 #include "AcousticsSpatializerEditorModule.h"
-#include "Interfaces/IPluginManager.h"
 #include "ISettingsModule.h"
 #include "AcousticsSpatializerSettings.h"
 
@@ -17,14 +16,16 @@ void FAcousticsSpatializerEditorModule::StartupModule()
         SettingsModule->RegisterSettings("Project", "Plugins", "Project Acoustics Spatializer", NSLOCTEXT("ProjectAcousticsSpatializer", "Project Acoustics Spatializer", "Project Acoustics Spatializer"),
             NSLOCTEXT("ProjectAcousticsSpatializer", "Configure Project Acoustics Spatializer plugin settings", "Configure Project Acoustics Spatializer plugin settings"), GetMutableDefault<UAcousticsSpatializerSettings>());
     }
-
-    // Register the audio editor asset type actions.
-    IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
-    AssetTools.RegisterAssetTypeActions(MakeShared<FAssetTypeActions_AcousticsReverbSettings>());
 }
 
 void FAcousticsSpatializerEditorModule::ShutdownModule()
 {
+    // Unregister our custom plugin's settings.
+    ISettingsModule* SettingsModule = FModuleManager::Get().GetModulePtr<ISettingsModule>("Settings");
+    if (SettingsModule)
+    {
+        SettingsModule->UnregisterSettings("Project", "Plugins", "Project Acoustics Spatializer");
+    }
 }
 
 #undef LOCTEXT_NAMESPACE

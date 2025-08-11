@@ -3,41 +3,38 @@
 
 #include "AcousticsReverbSettingsFactory.h"
 #include "AcousticsSpatializerSettings.h"
-#include "UObject/ObjectMacros.h"
+#include "AssetTypeCategories.h"
 #include "UObject/Object.h"
 
-FText FAssetTypeActions_AcousticsReverbSettings::GetName() const
+#define LOCTEXT_NAMESPACE "ProjectAcoustics"
+
+FText UAssetDefinition_AcousticsReverbSettings::GetAssetDisplayName() const
 {
-    return NSLOCTEXT("AssetTypeActions", "AssetTypeActions_AcousticsReverbPluginPreset", "Project Acoustics Reverb Settings");
+    return LOCTEXT("AssetDefinition_AcousticsReverbPluginPreset", "Project Acoustics Reverb Settings");
 }
 
-FColor FAssetTypeActions_AcousticsReverbSettings::GetTypeColor() const
-{
-    return FColor(100, 100, 100);
-}
-
-UClass* FAssetTypeActions_AcousticsReverbSettings::GetSupportedClass() const
+TSoftClassPtr<UObject> UAssetDefinition_AcousticsReverbSettings::GetAssetClass() const
 {
     return UAcousticsSpatializerSettings::StaticClass();
 }
 
-uint32 FAssetTypeActions_AcousticsReverbSettings::GetCategories()
+FLinearColor UAssetDefinition_AcousticsReverbSettings::GetAssetColor() const
 {
-    return EAssetTypeCategories::Sounds;
+    return FLinearColor(FColor(100, 100, 100));
 }
 
-const TArray<FText>& FAssetTypeActions_AcousticsReverbSettings::GetSubMenus() const
+FText UAssetDefinition_AcousticsReverbSettings::GetAssetDescription(const FAssetData& AssetData) const
 {
-    static const TArray<FText> SubMenus
-    {
-        NSLOCTEXT("AssetTypeActions", "AssetTypeActions_AssetSoundAcousticsSubMenu", "Project Acoustics")
-    };
-
-    return SubMenus;
+    return LOCTEXT("AssetDefinition_AcousticsReverbPluginPresetDesc", "Acoustics Spatializer Settings.");
 }
 
-UAcousticsReverbSettingsFactory::UAcousticsReverbSettingsFactory(const FObjectInitializer& ObjectInitializer)
-    : Super(ObjectInitializer)
+TConstArrayView<FAssetCategoryPath> UAssetDefinition_AcousticsReverbSettings::GetAssetCategories() const
+{
+    static const auto Categories = { EAssetCategoryPaths::Audio / LOCTEXT("AssetSoundProjectAcousticsSubMenu", "Project Acoustics") };
+    return Categories;
+}
+
+UAcousticsReverbSettingsFactory::UAcousticsReverbSettingsFactory()
 {
     SupportedClass = UAcousticsSpatializerSettings::StaticClass();
 
@@ -55,3 +52,5 @@ uint32 UAcousticsReverbSettingsFactory::GetMenuCategories() const
 {
     return EAssetTypeCategories::Sounds;
 }
+
+#undef LOCTEXT_NAMESPACE

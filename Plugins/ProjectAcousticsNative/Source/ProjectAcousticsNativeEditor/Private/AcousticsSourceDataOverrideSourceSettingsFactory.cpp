@@ -4,60 +4,54 @@
 #include "AcousticsSourceDataOverrideSourceSettingsFactory.h"
 #include "AcousticsSourceDataOverrideSourceSettings.h"
 #include "AssetTypeCategories.h"
-#include "UObject/ObjectMacros.h"
 #include "UObject/Object.h"
 
-#define LOCTEXT_NAMESPACE "AssetTypeActions"
+#define LOCTEXT_NAMESPACE "ProjectAcoustics"
 
-FText FAssetTypeActions_AcousticsSourceDataOverrideSourceSettings::GetName() const
+FText UAssetDefinition_AcousticsSourceDataOverrideSourceSettings::GetAssetDisplayName() const
 {
-   return NSLOCTEXT("ProjectAcoustics", "AssetTypeActions_AcousticsSourceDataOverrideSourceSettings", "Project Acoustics Source Data Override Source Settings");
+    return LOCTEXT("AssetDefinition_AcousticsSourceDataOverrideSourceSettings", "Project Acoustics Source Data Override Source Settings");
 }
 
-const TArray<FText>& FAssetTypeActions_AcousticsSourceDataOverrideSourceSettings::GetSubMenus() const
+TSoftClassPtr<UObject> UAssetDefinition_AcousticsSourceDataOverrideSourceSettings::GetAssetClass() const
 {
-    static const TArray<FText> SubMenus
-    {
-        NSLOCTEXT("ProjectAcoustics", "AssetSoundProjectAcousticsSubMenu", "Project Acoustics")
-    };
-
-    return SubMenus;
+    return UAcousticsSourceDataOverrideSourceSettings::StaticClass();
 }
 
-FColor FAssetTypeActions_AcousticsSourceDataOverrideSourceSettings::GetTypeColor() const
+FLinearColor UAssetDefinition_AcousticsSourceDataOverrideSourceSettings::GetAssetColor() const
 {
-   return FColor(100, 100, 100);
+    return FLinearColor(FColor(100, 100, 100));
 }
 
-UClass* FAssetTypeActions_AcousticsSourceDataOverrideSourceSettings::GetSupportedClass() const
+FText UAssetDefinition_AcousticsSourceDataOverrideSourceSettings::GetAssetDescription(const FAssetData& AssetData) const
 {
-   return UAcousticsSourceDataOverrideSourceSettings::StaticClass();
+    return LOCTEXT("AssetDefinition_AcousticsSourceDataOverrideSourceSettingsDesc", "Share per-source settings that can be saved to your Source Data Override Attenuation Settings.");
 }
 
-uint32 FAssetTypeActions_AcousticsSourceDataOverrideSourceSettings::GetCategories()
+TConstArrayView<FAssetCategoryPath> UAssetDefinition_AcousticsSourceDataOverrideSourceSettings::GetAssetCategories() const
 {
-   return EAssetTypeCategories::Sounds;
+    static const auto Categories = { EAssetCategoryPaths::Audio / LOCTEXT("AssetSoundProjectAcousticsSubMenu", "Project Acoustics") };
+    return Categories;
 }
 
-UAcousticsSourceDataOverrideSourceSettingsFactory::UAcousticsSourceDataOverrideSourceSettingsFactory(const FObjectInitializer& ObjectInitializer)
-   : Super(ObjectInitializer)
+UAcousticsSourceDataOverrideSourceSettingsFactory::UAcousticsSourceDataOverrideSourceSettingsFactory()
 {
-   SupportedClass = UAcousticsSourceDataOverrideSourceSettings::StaticClass();
+    SupportedClass = UAcousticsSourceDataOverrideSourceSettings::StaticClass();
 
-   bCreateNew = true;
-   bEditorImport = true;
-   bEditAfterNew = true;
+    bCreateNew = true;
+    bEditorImport = true;
+    bEditAfterNew = true;
 }
 
 UObject* UAcousticsSourceDataOverrideSourceSettingsFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context,
-   FFeedbackContext* Warn)
+    FFeedbackContext* Warn)
 {
-   return NewObject<UAcousticsSourceDataOverrideSourceSettings>(InParent, Name, Flags);
+    return NewObject<UAcousticsSourceDataOverrideSourceSettings>(InParent, Name, Flags);
 }
 
 uint32 UAcousticsSourceDataOverrideSourceSettingsFactory::GetMenuCategories() const
 {
-   return EAssetTypeCategories::Sounds;
+    return EAssetTypeCategories::Sounds;
 }
 
 #undef LOCTEXT_NAMESPACE

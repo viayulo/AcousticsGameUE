@@ -4,23 +4,31 @@
 #pragma once
 
 #include "Factories/Factory.h"
-#include "AssetTypeActions_Base.h"
+#include "AssetDefinitionDefault.h"
 #include "AcousticsReverbSettingsFactory.generated.h"
 
-class FAssetTypeActions_AcousticsReverbSettings : public FAssetTypeActions_Base
+UCLASS()
+class UAssetDefinition_AcousticsReverbSettings : public UAssetDefinitionDefault
 {
+    GENERATED_BODY()
+
 public:
-    virtual FText GetName() const override;
-    virtual FColor GetTypeColor() const override;
-    virtual UClass* GetSupportedClass() const override;
-    virtual uint32 GetCategories() override;
-    virtual const TArray<FText>& GetSubMenus() const override;
+    //~UAssetDefinition interface
+    FText GetAssetDisplayName() const override final;
+    TSoftClassPtr<UObject> GetAssetClass() const override final;
+    FLinearColor GetAssetColor() const override final;
+    FText GetAssetDescription(const FAssetData& AssetData) const override final;
+    TConstArrayView<FAssetCategoryPath> GetAssetCategories() const override final;
+    //~End of UAssetDefinition interface
 };
 
 UCLASS(MinimalAPI, hidecategories = Object)
 class UAcousticsReverbSettingsFactory : public UFactory
 {
-    GENERATED_UCLASS_BODY()
+    GENERATED_BODY()
+
+public:
+    UAcousticsReverbSettingsFactory();
 
     virtual UObject* FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) override;
     virtual uint32 GetMenuCategories() const override;

@@ -2,21 +2,13 @@
 // Licensed under the MIT License.
 
 #include "AcousticsNativeEditorModule.h"
-#include "Interfaces/IPluginManager.h"
-#include "Styling/SlateStyle.h"
-#include "AcousticsSourceDataOverrideSourceSettingsFactory.h"
 #include "ISettingsModule.h"
-#include "AssetToolsModule.h"
 #include "AcousticsSourceDataOverrideSettings.h"
 
 #define LOCTEXT_NAMESPACE "FAcousticsNativeEditorModule"
 
 void FAcousticsNativeEditorModule::StartupModule()
 {
-    // Register the audio editor asset type actions.
-    IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
-    AssetTools.RegisterAssetTypeActions(MakeShared<FAssetTypeActions_AcousticsSourceDataOverrideSourceSettings>());
-
     // Register our custom plugin's settings.
     ISettingsModule* SettingsModule = FModuleManager::Get().GetModulePtr<ISettingsModule>("Settings");
     if (SettingsModule)
@@ -28,6 +20,12 @@ void FAcousticsNativeEditorModule::StartupModule()
 
 void FAcousticsNativeEditorModule::ShutdownModule()
 {
+    // Unregister our custom plugin's settings.
+    ISettingsModule* SettingsModule = FModuleManager::Get().GetModulePtr<ISettingsModule>("Settings");
+    if (SettingsModule)
+    {
+        SettingsModule->UnregisterSettings("Project", "Plugins", "Project Acoustics SDO");
+    }
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -48,7 +48,8 @@ public class ProjectAcousticsNativeEditor : ModuleRules
                 "Core",
                 "CoreUObject",
                 "Engine",
-                "UnrealEd"
+                "UnrealEd",
+                "AssetDefinition"
                 // Dependencies for converting landscape to static mesh
                 // ... add private dependencies that you statically link with here ...
             }
