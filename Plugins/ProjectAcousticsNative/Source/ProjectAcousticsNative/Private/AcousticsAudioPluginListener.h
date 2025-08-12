@@ -5,6 +5,9 @@
 #include "Sound/AmbientSound.h"
 #include "AcousticsSourceDataOverride.h"
 
+class FProjectAcousticsNativeModule;
+class FAcousticsSourceDataOverride;
+
 /**
  * Responsible for spawning virtual speakers and maintaining their position around the listener
  */
@@ -23,10 +26,10 @@ public:
 private:
 
     // Connection to the base plugin module, where we keep track of the audio devices that spawn us
-    class FProjectAcousticsNativeModule* m_AcousticsNativeAudioModule;
+    FProjectAcousticsNativeModule* m_AcousticsNativeAudioModule;
 
     // Connection to the owning SourceDataOverride plugin
-    class FAcousticsSourceDataOverride* m_SourceDataOverridePtr;
+    FAcousticsSourceDataOverride* m_SourceDataOverridePtr;
 
     // The ambient sound actors representing each virtual speaker
     TArray<AAmbientSound*> m_VirtualSpeakers;

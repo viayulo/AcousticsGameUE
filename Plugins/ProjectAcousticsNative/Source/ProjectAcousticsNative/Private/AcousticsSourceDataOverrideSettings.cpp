@@ -43,13 +43,13 @@ UAcousticsSourceDataOverrideSettings::UAcousticsSourceDataOverrideSettings() :
 
 void UAcousticsSourceDataOverrideSettings::SetReverbBuses(FReverbBusesInfo buses)
 {
-    ShortIndoorReverbSubmix = buses.ShortIndoorReverbSubmixName;
-    MediumIndoorReverbSubmix = buses.MediumIndoorReverbSubmixName;
-    LongIndoorReverbSubmix = buses.LongIndoorReverbSubmixName;
+    ShortIndoorReverbSubmix = FSoftObjectPath(buses.ShortIndoorReverbSubmixName);
+    MediumIndoorReverbSubmix = FSoftObjectPath(buses.MediumIndoorReverbSubmixName);
+    LongIndoorReverbSubmix = FSoftObjectPath(buses.LongIndoorReverbSubmixName);
 
-    ShortOutdoorReverbSubmix = buses.ShortOutdoorReverbSubmixName;
-    MediumOutdoorReverbSubmix = buses.MediumOutdoorReverbSubmixName;
-    LongOutdoorReverbSubmix = buses.LongOutdoorReverbSubmixName;
+    ShortOutdoorReverbSubmix = FSoftObjectPath(buses.ShortOutdoorReverbSubmixName);
+    MediumOutdoorReverbSubmix = FSoftObjectPath(buses.MediumOutdoorReverbSubmixName);
+    LongOutdoorReverbSubmix = FSoftObjectPath(buses.LongOutdoorReverbSubmixName);
 
     ShortReverbLength = buses.ShortReverbLength;
     MediumReverbLength = buses.MediumReverbLength;

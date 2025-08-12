@@ -3,7 +3,10 @@
 
 #pragma once
 #include "Runtime/Launch/Resources/Version.h"
+#include "UObject/SoftObjectPtr.h"
 #include "AcousticsSourceDataOverrideSettings.generated.h"
+
+class USoundSubmix;
 
 UENUM(BlueprintType)
 enum class EReverbBusesPreset : uint8
@@ -99,54 +102,48 @@ public:
      *length, each between 0-5 seconds
      */
     UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor",
-        meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath ShortIndoorReverbSubmix;
+        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
+    TSoftObjectPtr<USoundSubmix> ShortIndoorReverbSubmix;
 
     /**
      *    Reverb submix containing medium, indoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
     UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor",
-        meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath MediumIndoorReverbSubmix;
+        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
+    TSoftObjectPtr<USoundSubmix> MediumIndoorReverbSubmix;
 
     /**
      *    Reverb submix containing long, indoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
     UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor",
-        meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath LongIndoorReverbSubmix;
+        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
+    TSoftObjectPtr<USoundSubmix> LongIndoorReverbSubmix;
 
     /**
      *    Reverb submix containing short, outdoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
     UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor",
-        meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath ShortOutdoorReverbSubmix;
+        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
+    TSoftObjectPtr<USoundSubmix> ShortOutdoorReverbSubmix;
 
     /**
      *    Reverb submix containing medium, outdoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
     UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor",
-        meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath MediumOutdoorReverbSubmix;
+        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
+    TSoftObjectPtr<USoundSubmix> MediumOutdoorReverbSubmix;
 
     /**
      *    Reverb submix containing long, outdoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
     UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor",
-        meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath LongOutdoorReverbSubmix;
+        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
+    TSoftObjectPtr<USoundSubmix> LongOutdoorReverbSubmix;
 
     /**
      *    Duration of both short impulse responses (seconds). This is the duration of the impulse response, not the
@@ -181,38 +178,38 @@ private:
     /**
      * Duplicate of the ShortIndoorReverbSubmix property. Used to store the last assigned custom submix
      */
-    UPROPERTY(GlobalConfig, meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath ShortIndoorReverbSubmixCustom;
+    UPROPERTY(GlobalConfig)
+    TSoftObjectPtr<USoundSubmix> ShortIndoorReverbSubmixCustom;
 
     /**
      * Duplicate of the MediumIndoorReverbSubmix property. Used to store the last assigned custom submix
      */
-    UPROPERTY(GlobalConfig, meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath MediumIndoorReverbSubmixCustom;
+    UPROPERTY(GlobalConfig)
+    TSoftObjectPtr<USoundSubmix> MediumIndoorReverbSubmixCustom;
 
     /**
      * Duplicate of the LongIndoorReverbSubmix property. Used to store the last assigned custom submix
      */
-    UPROPERTY(GlobalConfig, meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath LongIndoorReverbSubmixCustom;
+    UPROPERTY(GlobalConfig)
+    TSoftObjectPtr<USoundSubmix> LongIndoorReverbSubmixCustom;
 
     /**
      * Duplicate of the ShortOutdoorReverbSubmix property. Used to store the last assigned custom submix
      */
-    UPROPERTY(GlobalConfig, meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath ShortOutdoorReverbSubmixCustom;
+    UPROPERTY(GlobalConfig)
+    TSoftObjectPtr<USoundSubmix> ShortOutdoorReverbSubmixCustom;
 
     /**
      * Duplicate of the MediumOutdoorReverbSubmix property. Used to store the last assigned custom submix
      */
-    UPROPERTY(GlobalConfig, meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath MediumOutdoorReverbSubmixCustom;
+    UPROPERTY(GlobalConfig)
+    TSoftObjectPtr<USoundSubmix> MediumOutdoorReverbSubmixCustom;
 
     /**
      * Duplicate of the LongOutdoorReverbSubmix property. Used to store the last assigned custom submix
      */
-    UPROPERTY(GlobalConfig, meta = (AllowedClasses = "/Script/Engine.SoundSubmix"))
-    FSoftObjectPath LongOutdoorReverbSubmixCustom;
+    UPROPERTY(GlobalConfig)
+    TSoftObjectPtr<USoundSubmix> LongOutdoorReverbSubmixCustom;
 
     /**
      *    Duplicate of the ShortReverbLength property. Used to store the last assigned custom length

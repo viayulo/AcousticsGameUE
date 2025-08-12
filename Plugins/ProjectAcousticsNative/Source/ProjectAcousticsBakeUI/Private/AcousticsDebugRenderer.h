@@ -21,24 +21,9 @@ class AAcousticsDebugRenderer : public AActor
 {
     GENERATED_BODY()
 
-private:
+public:
     AAcousticsDebugRenderer(const FObjectInitializer& ObjectInitializer);
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Probes", AllowPrivateAccess = "true"))
-    bool ShouldRenderProbes = true;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Voxels", AllowPrivateAccess = "true"))
-    bool ShouldRenderVoxels;
-
-    // Expose draw distance for voxel
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Voxels Draw Distance", AllowPrivateAccess = "true"))
-    float VoxelsDrawDistance = 1000.0f;
-
-    // Expose Probes' draw distance
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Probes Draw Distance", AllowPrivateAccess = "true"))
-    float ProbesDrawDistance = 2000.0f;
-
-public:
     void SetConfiguration(TSharedPtr<AcousticsSimulationConfiguration> config);
     virtual bool ShouldTickIfViewportsOnly() const override;
     virtual void Tick(float deltaSeconds) override;
@@ -57,7 +42,20 @@ private:
     FIntVector MapPointToVoxel(const FVector& point) const;
     FVector MapVoxelToPoint(const FIntVector& voxel) const;
 
-private:
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Probes", AllowPrivateAccess = "true"))
+    bool ShouldRenderProbes = true;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Render Voxels", AllowPrivateAccess = "true"))
+    bool ShouldRenderVoxels;
+
+    // Expose draw distance for voxel
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Voxels Draw Distance", AllowPrivateAccess = "true"))
+    float VoxelsDrawDistance = 1000.0f;
+
+    // Expose Probes' draw distance
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics", meta = (DisplayName = "Probes Draw Distance", AllowPrivateAccess = "true"))
+    float ProbesDrawDistance = 2000.0f;
+
     TSharedPtr<AcousticsSimulationConfiguration> m_Config;
     FCriticalSection m_Lock;
     TArray<FVector> m_ProbeLocations;

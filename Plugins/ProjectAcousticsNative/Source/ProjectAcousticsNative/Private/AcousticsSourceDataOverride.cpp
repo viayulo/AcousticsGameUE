@@ -92,17 +92,17 @@ void FAcousticsSourceDataOverride::Initialize(const FAudioPluginInitializationPa
         m_IsSpatialReverbInitialized = true;
     }
 
-    auto shortIndoorSubmix = Cast<USoundSubmix>(settings->ShortIndoorReverbSubmix.TryLoad());
-    auto mediumIndoorSubmix = Cast<USoundSubmix>(settings->MediumIndoorReverbSubmix.TryLoad());
-    auto longIndoorSubmix = Cast<USoundSubmix>(settings->LongIndoorReverbSubmix.TryLoad());
+    USoundSubmix* shortIndoorSubmix = settings->ShortIndoorReverbSubmix.LoadSynchronous();
+    USoundSubmix* mediumIndoorSubmix = settings->MediumIndoorReverbSubmix.LoadSynchronous();
+    USoundSubmix* longIndoorSubmix = settings->LongIndoorReverbSubmix.LoadSynchronous();
 
-    auto shortOutdoorSubmix = Cast<USoundSubmix>(settings->ShortOutdoorReverbSubmix.TryLoad());
-    auto mediumOutdoorSubmix = Cast<USoundSubmix>(settings->MediumOutdoorReverbSubmix.TryLoad());
-    auto longOutdoorSubmix = Cast<USoundSubmix>(settings->LongOutdoorReverbSubmix.TryLoad());
+    USoundSubmix* shortOutdoorSubmix = settings->ShortOutdoorReverbSubmix.LoadSynchronous();
+    USoundSubmix* mediumOutdoorSubmix = settings->MediumOutdoorReverbSubmix.LoadSynchronous();
+    USoundSubmix* longOutdoorSubmix = settings->LongOutdoorReverbSubmix.LoadSynchronous();
 
     // Check if the submixes entered in the settings are valid
-    if (shortIndoorSubmix == nullptr || mediumIndoorSubmix == nullptr || longIndoorSubmix == nullptr ||
-        shortOutdoorSubmix == nullptr || mediumOutdoorSubmix == nullptr || longOutdoorSubmix == nullptr)
+    if (!IsValid(shortIndoorSubmix) || !IsValid(mediumIndoorSubmix) || !IsValid(longIndoorSubmix) ||
+        !IsValid(shortOutdoorSubmix) || !IsValid(mediumOutdoorSubmix) || !IsValid(longOutdoorSubmix))
     {
         m_IsStereoReverbInitialized = false;
         UE_LOG(

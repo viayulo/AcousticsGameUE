@@ -31,7 +31,7 @@ public class ProjectAcousticsNative : ModuleRules
                 "ProjectAcousticsNative/Private"
             }
             );
-        
+
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
@@ -68,7 +68,7 @@ public class ProjectAcousticsNative : ModuleRules
             }
             );
 
-        var thirdPartyDir = Path.GetFullPath(Path.Combine(ModuleDirectory, "../../Source/ThirdParty"));
+        var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         // fix up include path that is needed for HrtfApiTypes.h
         PublicIncludePaths.Add(Path.Combine(thirdPartyDir, "Include"));
         // Go find the right libs to link based on target platform and config

@@ -40,7 +40,7 @@ void FAcousticsAudioPluginListener::OnListenerInitialize(FAudioDevice* AudioDevi
 
     // Create the effect chain that store our custom speaker effects. These speaker effects are responsible for outputing
     // the audio for each virtual speakers
-    TArray<TObjectPtr<USoundSourceBus>> sourceBuses;
+    TArray<USoundSourceBus*> sourceBuses;
     for (uint32 i = 0u; i < m_NumVirtualSpeakers; i++)
     {
         // Create the source bus
@@ -49,7 +49,7 @@ void FAcousticsAudioPluginListener::OnListenerInitialize(FAudioDevice* AudioDevi
         sourceBus->bAutoDeactivateWhenSilent = true;
 
         // The preset gets passed onto the actual SoundEffect that does the processing, so we set the ptr and index here
-        TObjectPtr<USoundEffectAcousticsVirtualSpeakerPreset> acousticsPreset = NewObject<USoundEffectAcousticsVirtualSpeakerPreset>();
+        USoundEffectAcousticsVirtualSpeakerPreset* acousticsPreset = NewObject<USoundEffectAcousticsVirtualSpeakerPreset>();
         acousticsPreset->SourceDataOverridePtr = m_SourceDataOverridePtr;
         acousticsPreset->SpeakerIndex = i;
 
@@ -58,7 +58,7 @@ void FAcousticsAudioPluginListener::OnListenerInitialize(FAudioDevice* AudioDevi
         chainEntry.Preset = acousticsPreset;
 
         // Put the chain entry on a preset chain
-        TObjectPtr<USoundEffectSourcePresetChain> presetChain = NewObject<USoundEffectSourcePresetChain>();
+        USoundEffectSourcePresetChain* presetChain = NewObject<USoundEffectSourcePresetChain>();
         presetChain->Chain.Add(chainEntry);
 
         // Add the preset chain to the source bus
