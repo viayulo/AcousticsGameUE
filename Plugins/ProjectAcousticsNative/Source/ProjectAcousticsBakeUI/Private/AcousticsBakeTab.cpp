@@ -54,7 +54,7 @@ void SAcousticsBakeTab::Construct(const FArguments& InArgs, SAcousticsEdit* owne
         "Make sure you have created your Azure Batch and Storage accounts.");
 
     const FString localBakeTextTitle = TEXT("Local Bake");
-    const FString localBakeText = TEXT("As an alternative to acoustics baking on Azure, perform bakes on your local PC. ");
+    const FString localBakeText = TEXT("As an alternative to acoustics baking on Azure, perform bakes on your local PC.\nNote: AVX instruction set support required.");
 
     // clang-format off
     ChildSlot
@@ -360,7 +360,7 @@ FReply SAcousticsBakeTab::OnLocalBakeButton()
 
 FReply SAcousticsBakeTab::OnDownloadLocalBakeToolsButton() const
 {
-    FString url = TEXT("https://www.microsoft.com/en-us/download/details.aspx?id=104692");
+    FString url = TEXT("https://github.com/viayulo/ProjectAcoustics/tree/main/Archive/CommandLineLocalBakeTools");
     FPlatformProcess::LaunchURL(*url, nullptr, nullptr);
     return FReply::Handled();
 }

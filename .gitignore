@@ -75,3 +75,4 @@ Plugins/**/Intermediate/*
 DerivedDataCache/*
 
 Content/Developers/
+__pycache__/
