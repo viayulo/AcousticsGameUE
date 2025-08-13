@@ -64,7 +64,7 @@ public class ProjectAcousticsSpatializer : ModuleRules
             }
             );
 
-        var thirdPartyDir = Path.GetFullPath(Path.Combine(ModuleDirectory, "../../Source/ThirdParty"));
+        var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         // fix up include path that is needed for HrtfApiTypes.h
         PublicIncludePaths.Add(Path.Combine(thirdPartyDir, "Include"));
         // Go find the right libs to link based on target platform and config
@@ -109,7 +109,7 @@ public class ProjectAcousticsSpatializer : ModuleRules
             var thirdPartyLibPath = Path.Combine(Path.Combine(thirdPartyDir, arch), configuration);
             PublicAdditionalLibraries.Add(Path.Combine(thirdPartyLibPath, hrtfDspLibName));
             PublicDelayLoadDLLs.Add(hrtfDspDllName);
-            RuntimeDependencies.Add(Path.Combine(thirdPartyDir, "Win64", configuration, hrtfDspDllName));
+            RuntimeDependencies.Add(Path.Combine("$(TargetOutputDir)", hrtfDspDllName), Path.Combine(thirdPartyDir, "Win64", configuration, hrtfDspDllName));
         }
     }
 }

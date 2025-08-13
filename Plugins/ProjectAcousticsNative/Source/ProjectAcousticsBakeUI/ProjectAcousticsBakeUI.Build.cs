@@ -37,14 +37,10 @@ public class ProjectAcousticsBakeUI : ModuleRules
             new string[]
             {
                 "Core",
-#if UE_4_22_OR_LATER
                 "MeshDescription",
-#endif
                 "ProjectAcoustics",
                 "UnrealEd",
-#if UE_5_0_OR_LATER
                 "EditorFramework",
-#endif
                 // ... add other public dependencies that you statically link with here ...
                 // Adding Source Control module to list of public dependencies to use
                 // source control operations during the prebake and bake process.
@@ -66,14 +62,8 @@ public class ProjectAcousticsBakeUI : ModuleRules
                 "LevelEditor",
                 "EditorStyle",
                 "Projects",
-#if UE_5_0_OR_LATER
                 "DeveloperToolSettings",
-#endif
-#if UE_4_20_OR_LATER
                 "NavigationSystem",
-#else
-                "NavMesh",
-#endif
                 "RawMesh",
                 "StaticMeshDescription",
                 "Landscape",
@@ -99,7 +89,7 @@ public class ProjectAcousticsBakeUI : ModuleRules
 
         var configuration = "Release";
         var arch = "Win64";
-        var thirdPartyDir = Path.GetFullPath(Path.Combine(ModuleDirectory, "../../Source/ThirdParty/"));
+        var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         var thirdPartyLibPath = Path.Combine(Path.Combine(thirdPartyDir, arch), configuration);
         var tritonPreprocessorDllPath = Path.Combine(thirdPartyLibPath, DllName);
         var tritonPreprocessorLibPath = Path.Combine(thirdPartyLibPath, LibName);
@@ -107,11 +97,7 @@ public class ProjectAcousticsBakeUI : ModuleRules
         PublicAdditionalLibraries.Add(tritonPreprocessorLibPath);
 
         PublicDelayLoadDLLs.Add(DllName);
-#if UE_4_20_OR_LATER
         RuntimeDependencies.Add(tritonPreprocessorDllPath);
-#else
-        RuntimeDependencies.Add(new RuntimeDependency(tritonPreprocessorDllPath));
-#endif
 
 #if ENABLE_COLLISION_SUPPORT
         PublicDefinitions.Add("ENABLE_COLLISION_SUPPORT=1");

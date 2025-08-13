@@ -36,7 +36,7 @@ public class ProjectAcoustics : ModuleRules
                 // ... add other private include paths required here ...
             }
             );
-        
+
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
@@ -67,7 +67,7 @@ public class ProjectAcoustics : ModuleRules
             }
             );
 
-        var thirdPartyDir = Path.GetFullPath(Path.Combine(ModuleDirectory, "../../Source/ThirdParty"));
+        var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         // fix up include path that is needed for TritonApiTypes.h
         PublicIncludePaths.Add(Path.Combine(thirdPartyDir, "Include"));
         // Go find the right libs to link based on target platform and config

@@ -113,7 +113,7 @@ public class ProjectAcousticsNative : ModuleRules
             var thirdPartyLibPath = Path.Combine(Path.Combine(thirdPartyDir, arch), configuration);
             PublicAdditionalLibraries.Add(Path.Combine(thirdPartyLibPath, hrtfDspLibName));
             PublicDelayLoadDLLs.Add(hrtfDspDllName);
-            RuntimeDependencies.Add(Path.Combine(thirdPartyDir, "Win64", configuration, hrtfDspDllName));
+            RuntimeDependencies.Add(Path.Combine("$(TargetOutputDir)", hrtfDspDllName), Path.Combine(thirdPartyDir, "Win64", configuration, hrtfDspDllName));
         }
     }
 }
