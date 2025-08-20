@@ -6,11 +6,12 @@
 #if !UE_BUILD_SHIPPING
 #include "ProjectAcoustics.h"
 #include "MathUtils.h"
-#include <DrawDebugHelpers.h>
-#include <Classes/Engine/Font.h>
-#include <Classes/Engine/Canvas.h>
+#include "DrawDebugHelpers.h"
+#include "Engine/Font.h"
+#include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "AcousticsShared.h"
+#include <string>
 
 using namespace TritonRuntime;
 
@@ -756,7 +757,7 @@ void FProjectAcousticsDebugRender::DrawDirection(
         -1.f,
         0,
         0.f);
-    
+
     // Wet text
     FDebugMultiLinePrinter p2(m_Canvas, wetLabelPos, m_CameraPos, m_CameraLook);
     auto wetText = FString::Printf(TEXT("Wet:%s Spread:%f"), *info.DisplayName.ToString(), spread);
@@ -829,7 +830,7 @@ void FProjectAcousticsDebugRender::DrawSources(AcousticsDrawParameters shouldDra
             tritonDebug->GetProbeMetadata(piv[i].ProbeIndex, probeMd);
             TritonRuntime::ReceiverInterpolationWeights weights = info.queryDebugInfo.GetReceiverInterpWeightsForProbe(i);
             auto probeLoc = probeMd.SimRegionVoxelBbox.MinCorner;
-            
+
             for (auto j = 0; j < c_MaxReceiverSamples; j++)
             {
                 if (weights.weight[j] < c_MinWeight)
@@ -937,11 +938,15 @@ void FProjectAcousticsDebugRender::DrawSources(AcousticsDrawParameters shouldDra
                 const auto& message = messageList[mess];
                 if (message.Type == TritonRuntime::QueryDebugInfo::Warning)
                 {
-                    errString += FString::Printf(TEXT("\nWARN: %s"), message.MessageString);
+                    const std::wstring wMessageString{ message.MessageString };
+                    const std::string messageString{ wMessageString.cbegin(), wMessageString.cend() };
+                    errString += FString::Printf(TEXT("\nWARN: %hs"), messageString.c_str());
                 }
                 else if (message.Type == TritonRuntime::QueryDebugInfo::Error)
                 {
-                    errString += FString::Printf(TEXT("\nERR: %s"), message.MessageString);
+                    const std::wstring wMessageString{ message.MessageString };
+                    const std::string messageString{ wMessageString.cbegin(), wMessageString.cend() };
+                    errString += FString::Printf(TEXT("\nERR: %hs"), messageString.c_str());
                 }
             }
         }
