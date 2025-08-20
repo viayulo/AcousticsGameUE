@@ -69,8 +69,8 @@ FProjectAcousticsModule::FProjectAcousticsModule()
 
 void FProjectAcousticsModule::StartupModule()
 {
-    m_TritonMemHook = TUniquePtr<FTritonMemHook>(new FTritonMemHook());
-    m_TritonLogHook = TUniquePtr<FTritonLogHook>(new FTritonLogHook());
+    m_TritonMemHook = MakeUnique<FTritonMemHook>();
+    m_TritonLogHook = MakeUnique<FTritonLogHook>();
     auto initSuccess = TritonAcoustics::Init(m_TritonMemHook.Get(), m_TritonLogHook.Get());
     if (!initSuccess)
     {
@@ -126,7 +126,7 @@ bool FProjectAcousticsModule::LoadAceFile(const FString& filePath, const float c
     {
         SCOPE_CYCLE_COUNTER(STAT_Acoustics_LoadAce);
         // Load the ACE file
-        m_TritonIOHook = TUniquePtr<FTritonUnrealIOHook>(new FTritonUnrealIOHook());
+        m_TritonIOHook = MakeUnique<FTritonUnrealIOHook>();
         if (!m_TritonIOHook->OpenForRead(TCHAR_TO_ANSI(*fullFilePath)))
         {
             m_TritonIOHook.Reset();
@@ -135,7 +135,7 @@ bool FProjectAcousticsModule::LoadAceFile(const FString& filePath, const float c
             return false;
         }
 
-        m_TritonTaskHook = TUniquePtr<FTritonAsyncTaskHook>(new FTritonAsyncTaskHook());
+        m_TritonTaskHook = MakeUnique<FTritonAsyncTaskHook>();
         if (!m_Triton->InitLoad(m_TritonIOHook.Get(), m_TritonTaskHook.Get(), cacheScale))
         {
             UE_LOG(LogAcousticsRuntime, Error, TEXT("Failed to load ACE file: [%s]"), *fullFilePath);

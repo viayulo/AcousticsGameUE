@@ -65,7 +65,7 @@ void FAcousticsSourceDataOverride::Initialize(const FAudioPluginInitializationPa
             return;
         }
 
-        m_SpatialReverb = TUniquePtr<FAcousticsSpatialReverb>(new FAcousticsSpatialReverb());
+        m_SpatialReverb = MakeUnique<FAcousticsSpatialReverb>();
 
         if (!m_SpatialReverb.IsValid() || !m_SpatialReverb->Initialize(
                 InitializationParams, settings->SpatialReverbQuality))
@@ -195,7 +195,7 @@ void FAcousticsSourceDataOverride::OnReleaseSource(const uint32 SourceId)
 
     m_LastSuccessfulQueryMap.Remove(SourceId);
 
-    if (m_SourceSettings[SourceId] != nullptr)
+    if (IsValid(m_SourceSettings[SourceId]))
     {
         showAcousticParameters = m_SourceSettings[SourceId]->Settings.ShowAcousticParameters;
     }
@@ -219,7 +219,7 @@ void FAcousticsSourceDataOverride::OnReleaseSource(const uint32 SourceId)
 void FAcousticsSourceDataOverride::ApplyAcousticsDesignParamsOverrides(
     UWorld* world, FVector sourceLocation, FAcousticsDesignParams& designParams)
 {
-    if (world)
+    if (IsValid(world))
     {
         TArray<FOverlapResult> OverlapResults;
         FCollisionQueryParams Params(SCENE_QUERY_STAT(AddForceOverlap), false);
@@ -237,7 +237,7 @@ void FAcousticsSourceDataOverride::ApplyAcousticsDesignParamsOverrides(
                 AAcousticsRuntimeVolume* AcousticsRuntimeVolume =
                     Cast<AAcousticsRuntimeVolume>(OverlapResult.GetActor());
 
-                if (AcousticsRuntimeVolume != nullptr)
+                if (IsValid(AcousticsRuntimeVolume))
                 {
                     auto overrideParams = AcousticsRuntimeVolume->OverrideDesignParams;
 
@@ -287,7 +287,7 @@ void FAcousticsSourceDataOverride::GetSourceDataOverrides(
 
     // Save the shared per-source settings if there are any
     auto sourceSettings = m_SourceSettings[SourceId];
-    if (sourceSettings != nullptr)
+    if (IsValid(sourceSettings))
     {
         objectParams.Design = sourceSettings->Settings.DesignParams;
         enablePortaling = sourceSettings->Settings.EnablePortaling;
@@ -308,10 +308,10 @@ void FAcousticsSourceDataOverride::GetSourceDataOverrides(
     UAcousticsAudioComponent* aac = nullptr;
 
     // Now check if this audio component is our PA specific component. If so, grab those settings too
-    if (audioComponent != nullptr && audioComponent->IsA<UAcousticsAudioComponent>())
+    if (IsValid(audioComponent) && audioComponent->IsA<UAcousticsAudioComponent>())
     {
         aac = Cast<UAcousticsAudioComponent>(audioComponent);
-        if (aac != nullptr)
+        if (aac)
         {
             // Audio Component params take precedence. Overwrite all settings with the ones from
             // the AcousticsAudioComponent

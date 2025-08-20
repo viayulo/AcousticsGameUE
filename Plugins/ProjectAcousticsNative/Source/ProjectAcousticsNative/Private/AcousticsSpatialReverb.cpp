@@ -137,7 +137,7 @@ void FAcousticsSpatialReverb::SaveInputBuffer(const uint32 sourceId, const float
     check(samplesPerFrame == m_HrtfFrameCount);
 
     auto inputSampleBufferPtr = m_InputSampleBuffers[sourceId].GetData();
-    FMemory::Memset(inputSampleBufferPtr, 0, sizeof(float) * m_HrtfFrameCount);
+    FMemory::Memzero(inputSampleBufferPtr, sizeof(float) * m_HrtfFrameCount);
 
     // Input audio is interleaved, so if it is multichannel, downsample it
     if (numChannels == 1)
@@ -221,7 +221,7 @@ void FAcousticsSpatialReverb::CopyOutputChannel(const uint32 outputChannelIndex,
 
     // Copy out the output buffer we have saved for this output channel. Then zero it for next time
     FMemory::Memcpy(outputBuffer, m_OutputSampleBuffers[outputChannelIndex].GetData(), sizeof(float) * m_HrtfFrameCount);
-    FMemory::Memset(m_OutputSampleBuffers[outputChannelIndex].GetData(), 0, sizeof(float) * m_HrtfFrameCount);
+    FMemory::Memzero(m_OutputSampleBuffers[outputChannelIndex].GetData(), sizeof(float) * m_HrtfFrameCount);
     m_HasProcessedAudio[outputChannelIndex] = false;
 }
 

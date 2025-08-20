@@ -17,7 +17,7 @@ FAcousticsAudioPluginListener::FAcousticsAudioPluginListener()
 void FAcousticsAudioPluginListener::OnListenerInitialize(FAudioDevice* AudioDevice, UWorld* ListenerWorld)
 {
     // Only initialize if this is a game playing. Either a real game or play in editor session
-    if (ListenerWorld == nullptr || (ListenerWorld->WorldType != EWorldType::Game && ListenerWorld->WorldType != EWorldType::PIE))
+    if (!IsValid(ListenerWorld) || (ListenerWorld->WorldType != EWorldType::Game && ListenerWorld->WorldType != EWorldType::PIE))
     {
         return;
     }

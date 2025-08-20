@@ -6,14 +6,14 @@
 
 void FSoundEffectAcousticsVirtualSpeaker::Init(const FSoundEffectSourceInitData& InitData)
 {
-    USoundEffectAcousticsVirtualSpeakerPreset* _Preset = Cast<USoundEffectAcousticsVirtualSpeakerPreset>(Preset);
+    auto _Preset = static_cast<const USoundEffectAcousticsVirtualSpeakerPreset*>(Preset.Get());
     m_SourceDataOverrideptr = _Preset->SourceDataOverridePtr;
     m_SpeakerIndex = _Preset->SpeakerIndex;
 }
 
 void FSoundEffectAcousticsVirtualSpeaker::OnPresetChanged()
 {
-    USoundEffectAcousticsVirtualSpeakerPreset* _Preset = Cast<USoundEffectAcousticsVirtualSpeakerPreset>(Preset); 
+    auto _Preset = static_cast<const USoundEffectAcousticsVirtualSpeakerPreset*>(Preset.Get());
     m_SourceDataOverrideptr = _Preset->SourceDataOverridePtr;
     m_SpeakerIndex = _Preset->SpeakerIndex;
 }
