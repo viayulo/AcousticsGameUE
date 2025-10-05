@@ -7,6 +7,8 @@
 #include "AcousticsDesignParams.h"
 #include "AcousticsSourceDataOverrideSourceSettings.generated.h"
 
+#define UE_API PROJECTACOUSTICSNATIVE_API
+
 /**
  * Structure that contains the various per-source settings that can be tweaked in the Project Acoustics Source Data Override
  * plugin
@@ -85,22 +87,23 @@ struct FAcousticsSourceSettings
 /**
 * Share per-source settings that can be saved to your Source Data Override Attenuation Settings
 */
-UCLASS(AutoExpandCategories = (Settings))
-class PROJECTACOUSTICSNATIVE_API UAcousticsSourceDataOverrideSourceSettings
+UCLASS(MinimalAPI, AutoExpandCategories = (Settings))
+class UAcousticsSourceDataOverrideSourceSettings
     : public USourceDataOverridePluginSourceSettingsBase
 {
     GENERATED_BODY()
 
 public:
-    UAcousticsSourceDataOverrideSourceSettings();
+    UE_API UAcousticsSourceDataOverrideSourceSettings();
 
     // The shared per-source settings for Project Acoustics sound sources
-    UPROPERTY(
-        EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
         meta = (DisplayName = "Source Settings", ShowOnlyInnerProperties))
     FAcousticsSourceSettings Settings;
 
 #if WITH_EDITOR
-    virtual bool CanEditChange(const FProperty* InProperty) const override;
+    UE_API virtual bool CanEditChange(const FProperty* InProperty) const override;
 #endif
 };
+
+#undef UE_API

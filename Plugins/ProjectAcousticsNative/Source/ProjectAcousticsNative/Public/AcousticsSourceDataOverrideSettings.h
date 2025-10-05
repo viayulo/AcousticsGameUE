@@ -2,9 +2,13 @@
 // Licensed under the MIT License.
 
 #pragma once
-#include "Runtime/Launch/Resources/Version.h"
+
 #include "UObject/SoftObjectPtr.h"
+#include "Misc/EngineVersionComparison.h"
+
 #include "AcousticsSourceDataOverrideSettings.generated.h"
+
+#define UE_API PROJECTACOUSTICSNATIVE_API
 
 class USoundSubmix;
 
@@ -39,7 +43,7 @@ enum class EAcousticsReverbType : uint8
     None UMETA(DisplayName = "None")
 };
 
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 1
+#if UE_VERSION_NEWER_THAN_OR_EQUAL(5, 1, 0)
 constexpr EAcousticsReverbType c_DefaultAcousticsReverbType = EAcousticsReverbType::SpatialReverb;
 constexpr bool c_SpatialReverbSupported = true;
 #else
@@ -65,7 +69,7 @@ struct FReverbBusesInfo
 };
 
 UCLASS(config = Engine, defaultconfig)
-class PROJECTACOUSTICSNATIVE_API UAcousticsSourceDataOverrideSettings : public UObject
+class UE_API UAcousticsSourceDataOverrideSettings : public UObject
 {
     GENERATED_BODY()
 
@@ -93,64 +97,63 @@ public:
     /**
      *	Preset for submix buses used for reverb
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb", meta = (DisplayName = "Reverb Bus Preset"))
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb", meta = (DisplayName = "Reverb Bus Preset"))
     EReverbBusesPreset ReverbBusesPreset;
 
     /**
      *    Reverb submix containing short, indoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
     TSoftObjectPtr<USoundSubmix> ShortIndoorReverbSubmix;
 
     /**
      *    Reverb submix containing medium, indoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
     TSoftObjectPtr<USoundSubmix> MediumIndoorReverbSubmix;
 
     /**
      *    Reverb submix containing long, indoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Indoor")
     TSoftObjectPtr<USoundSubmix> LongIndoorReverbSubmix;
 
     /**
      *    Reverb submix containing short, outdoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
     TSoftObjectPtr<USoundSubmix> ShortOutdoorReverbSubmix;
 
     /**
      *    Reverb submix containing medium, outdoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
     TSoftObjectPtr<USoundSubmix> MediumOutdoorReverbSubmix;
 
     /**
      *    Reverb submix containing long, outdoor impulse response. IRs should be ordered by length, short < medium <
      *length, each between 0-5 seconds
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere,
+        Category = "Reverb|Stereo Convolution Reverb|Bus Preset|Outdoor")
     TSoftObjectPtr<USoundSubmix> LongOutdoorReverbSubmix;
 
     /**
      *    Duration of both short impulse responses (seconds). This is the duration of the impulse response, not the
      *length of the file
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset",
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset",
         meta = (ClampMin = 0.0f, ClampMax = 5.0f, UIMin = 0.0f, UIMax = 5.0f, DisplayName = "Short Reverb Length"))
     float ShortReverbLength;
 
@@ -158,8 +161,7 @@ public:
      *    Duration of both medium impulse responses (seconds). This is the duration of the impulse response, not the
      *length of the file
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset",
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset",
         meta = (ClampMin = 0.0f, ClampMax = 5.0f, UIMin = 0.0f, UIMax = 5.0f, DisplayName = "Medium Reverb Length"))
     float MediumReverbLength;
 
@@ -167,8 +169,7 @@ public:
      *    Duration of both long impulse responses (seconds). This is the duration of the impulse response, not the
      *length of the file
      */
-    UPROPERTY(
-        GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset",
+    UPROPERTY(GlobalConfig, BlueprintReadWrite, EditAnywhere, Category = "Reverb|Stereo Convolution Reverb|Bus Preset",
         meta = (ClampMin = 0.0f, ClampMax = 5.0f, UIMin = 0.0f, UIMax = 5.0f, DisplayName = "Long Reverb Length"))
     float LongReverbLength;
 
@@ -231,3 +232,5 @@ private:
 
     TMap<EReverbBusesPreset, FReverbBusesInfo> ReverbBusesPresetMap;
 };
+
+#undef UE_API

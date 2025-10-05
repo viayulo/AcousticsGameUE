@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 #pragma once
-#include "CoreMinimal.h"
+
 #include "TritonVector.h"
 #include "Runtime/Launch/Resources/Version.h"
 

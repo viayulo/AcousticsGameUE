@@ -66,5 +66,5 @@ private:
     static TUniquePtr<AcousticsMaterialLibrary> m_KnownMaterialsLibrary;
     static TSharedPtr<AcousticsSimulationConfiguration> m_SimulationConfiguration;
     static TWeakObjectPtr<AAcousticsDebugRenderer> m_DebugRenderer;
-    static UAcousticsPythonBridge* m_PythonBridge;
+    static TObjectPtr<UAcousticsPythonBridge> m_PythonBridge;
 };

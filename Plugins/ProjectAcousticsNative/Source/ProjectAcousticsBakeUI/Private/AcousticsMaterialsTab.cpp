@@ -27,7 +27,8 @@
 #include "PhysicalMaterials/PhysicalMaterial.h"
 // Added support for landscape layered materials
 #include "LandscapeLayerInfoObject.h"
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 2
+#include "Misc/EngineVersionComparison.h"
+#if UE_VERSION_NEWER_THAN_OR_EQUAL(5, 2, 0)
 #include "MaterialDomain.h" // For MD_Surface
 #endif
 #include "AcousticsShared.h"
@@ -294,7 +295,7 @@ void SAcousticsMaterialsTab::UpdateUEMaterials()
                         ULandscapeLayerInfoObject* LayerInfo = LayerSettings.LayerInfoObj;
                         if (LayerInfo != nullptr)
                         {
-                            const UPhysicalMaterial* layerPhysMaterial = LayerInfo->PhysMaterial;
+                            const UPhysicalMaterial* layerPhysMaterial = LayerInfo->GetPhysicalMaterial();
                             if (m_AcousticsEditMode->ShouldUsePhysicalMaterial(layerPhysMaterial))
                             {
                                 AddNewUEMaterial(layerPhysMaterial->GetName());
@@ -564,8 +565,8 @@ void SAcousticsMaterialsTab::OnRowSelectionChanged(TSharedPtr<MaterialItem> InIt
                     // Select landscape based on physical material on lanscape material layers.
                     for (const auto& [LayerName, LayerSettings] : landscape->GetTargetLayers())
                     {
-                        if ((m_AcousticsEditMode->ShouldUsePhysicalMaterial(LayerSettings.LayerInfoObj->PhysMaterial) &&
-                             LayerSettings.LayerInfoObj->PhysMaterial->GetName() == InItem->UEMaterialName) ||
+                        if ((m_AcousticsEditMode->ShouldUsePhysicalMaterial(LayerSettings.LayerInfoObj->GetPhysicalMaterial()) &&
+                             LayerSettings.LayerInfoObj->GetPhysicalMaterial()->GetName() == InItem->UEMaterialName) ||
                             LayerSettings.LayerInfoObj->GetName() == InItem->UEMaterialName)
                         {
                             GEditor->SelectActor(curActor, true, false, true, false);

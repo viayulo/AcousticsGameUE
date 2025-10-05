@@ -3,10 +3,13 @@
 #pragma once
 
 #include "UObject/Object.h"
+
 #include "AcousticsData.generated.h"
 
+#define UE_API PROJECTACOUSTICS_API
+
 UCLASS(meta = (BlueprintSpawnableComponent))
-class PROJECTACOUSTICS_API UAcousticsData : public UObject
+class UE_API UAcousticsData : public UObject
 {
     GENERATED_BODY()
 
@@ -39,3 +42,5 @@ private:
     // location during the reimport process. It will be cleared after reimport is complete.
     FString m_ReimportFilepath;
 };
+
+#undef UE_API

@@ -9,6 +9,7 @@
 #include "AcousticsSpatialReverb.h"
 #include "AcousticsSourceDataOverrideSourceSettings.h"
 #include "AcousticsSourceDataOverrideSettings.h"
+#include "Misc/EngineVersionComparison.h"
 
 class FAcousticsSourceDataOverride : public IAudioSourceDataOverride
 {
@@ -23,7 +24,7 @@ public:
     virtual void OnReleaseSource(const uint32 SourceId);
     virtual void GetSourceDataOverrides(
         const uint32 SourceId, const FTransform& InListenerTransform, FWaveInstance* InOutWaveInstance);
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 1
+#if UE_VERSION_NEWER_THAN_OR_EQUAL(5, 1, 0)
     virtual void OnAllSourcesProcessed();
 #endif
 

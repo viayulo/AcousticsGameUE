@@ -2,8 +2,6 @@
 // Licensed under the MIT License.
 #include "AcousticsSimulationConfiguration.h"
 #include "MathUtils.h"
-// Include for ENGINE_MAJOR_VERSION
-#include "Runtime/Launch/Resources/Version.h"
 
 AcousticsSimulationConfiguration::~AcousticsSimulationConfiguration()
 {

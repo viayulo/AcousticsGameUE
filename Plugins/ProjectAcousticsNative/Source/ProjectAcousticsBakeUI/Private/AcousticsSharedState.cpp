@@ -17,7 +17,7 @@
 #include "AcousticsShared.h"
 #include "AcousticsEdMode.h"
 
-UAcousticsPythonBridge* AcousticsSharedState::m_PythonBridge = nullptr;
+TObjectPtr<UAcousticsPythonBridge> AcousticsSharedState::m_PythonBridge = nullptr;
 TUniquePtr<AcousticsMaterialLibrary> AcousticsSharedState::m_MaterialLibrary;
 TUniquePtr<AcousticsMaterialLibrary> AcousticsSharedState::m_KnownMaterialsLibrary;
 TSharedPtr<AcousticsSimulationConfiguration> AcousticsSharedState::m_SimulationConfiguration;

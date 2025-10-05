@@ -214,7 +214,10 @@ END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 void SAcousticsBakeTab::Refresh()
 {
-    m_ComputePoolPanel->Refresh();
+    if (m_ComputePoolPanel.IsValid())
+    {
+        m_ComputePoolPanel->Refresh();
+    }
 }
 
 bool SAcousticsBakeTab::ShouldEnableSubmitCancel() const
@@ -318,7 +321,7 @@ FReply SAcousticsBakeTab::OnLocalBakeButton()
             "the bake. To import the .ace file into your project, use the Content Browser to navigate to the Content\"Acoustics folder and "
             "either drag and drop your .ace file into the folder -or- select the Import button and find the .ace file you "
             "would like to import into the project. Once the import is complete, you can then set the Acoustics Data property of the "
-            "AcousticsSpace actor to new .ace file. Consult the documentation on https://aka.ms/acoustics for more documentation about "
+            "AcousticsSpace actor to new .ace file. Consult the documentation on https://github.com/viayulo/ProjectAcoustics/blob/main/Archive/README.md for more documentation about "
             "importing ACE files into a project.\n"),
             *FPaths::GetCleanFilename(configPath));
         FFileHelper::SaveStringToFile(readmeFileContents, *readmeFilePath);

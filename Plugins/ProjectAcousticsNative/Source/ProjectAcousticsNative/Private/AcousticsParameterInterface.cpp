@@ -1,7 +1,11 @@
 // Copyright (c) 2022 Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 #include "AcousticsParameterInterface.h"
+#include "Misc/EngineVersionComparison.h"
+
+#if UE_VERSION_OLDER_THAN(5, 3, 0)
 #include "Sound/SoundBase.h"
+#endif
 
 // Required for ensuring the node is supported by all languages in engine.
 #define LOCTEXT_NAMESPACE "ProjectAcousticsParameterInterface"
@@ -30,7 +34,7 @@ namespace AcousticsParameterInterface
     {
         struct FInterface : public Audio::FParameterInterface
         {
-#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION <= 2)
+#if UE_VERSION_OLDER_THAN(5, 3, 0)
             FInterface() : FParameterInterface(AcousticsParameterInterface::Name, {1, 0}, *USoundBase::StaticClass())
 #else
             FInterface() : FParameterInterface(AcousticsParameterInterface::Name, {1, 0})

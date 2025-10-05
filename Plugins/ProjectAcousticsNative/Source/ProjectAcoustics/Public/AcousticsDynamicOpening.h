@@ -4,16 +4,19 @@
 #pragma once
 
 #include "Components/StaticMeshComponent.h"
-#if ENGINE_MAJOR_VERSION == 5
+#include "Misc/EngineVersionComparison.h"
+#if UE_VERSION_NEWER_THAN_OR_EQUAL(5, 0, 0)
 #include "UObject/ObjectSaveContext.h"
 #endif
+
 #include "AcousticsDynamicOpening.generated.h"
 
-UCLASS(
-    ClassGroup = Acoustics, AutoExpandCategories = (Transform, StaticMesh, Acoustics),
+#define UE_API PROJECTACOUSTICS_API
+
+UCLASS(ClassGroup = Acoustics, AutoExpandCategories = (Transform, StaticMesh, Acoustics),
     AutoCollapseCategories = (Physics, Collision, Lighting, Rendering, Cooking, Tags), BlueprintType, Blueprintable,
     meta = (BlueprintSpawnableComponent))
-class PROJECTACOUSTICS_API UAcousticsDynamicOpening : public UStaticMeshComponent
+class UE_API UAcousticsDynamicOpening : public UStaticMeshComponent
 {
     GENERATED_BODY()
 
@@ -22,15 +25,13 @@ public:
 
     /** Specify dB attenuation on dry audio going through this opening
      */
-    UPROPERTY(
-        EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
         meta = (UIMin = -120, ClampMin = -120, UIMax = 0, ClampMax = 0))
     float DryAttenuationDb;
 
     /** Specify dB attenuation on wet audio going through this opening
      */
-    UPROPERTY(
-        EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
         meta = (UIMin = -120, ClampMin = -120, UIMax = 0, ClampMax = 0))
     float WetAttenuationDb;
 
@@ -38,8 +39,7 @@ public:
      * through this opening, this value will be multiplied by 100 to turn into percentage,
      * and set as value for "AcousticsOpeningFiltering" RTPC on that game object.
      */
-    UPROPERTY(
-        EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
         meta = (UIMin = 0, ClampMin = 0, UIMax = 1, ClampMax = 1))
     float Filtering;
 
@@ -89,3 +89,5 @@ private:
     bool ExtractOpeningGeometry(TArray<FVector>& outVertices, FVector& outCenter, FVector& outNormal) const;
 #endif
 };
+
+#undef UE_API

@@ -5,7 +5,10 @@
 
 #include "GameFramework/Volume.h"
 #include "AcousticsDesignParams.h"
+
 #include "AcousticsRuntimeVolume.generated.h"
+
+#define UE_API PROJECTACOUSTICS_API
 
 /**
  *	Volume used to override runtime design parameters for acoustics audio components. Any acoustics audio components
@@ -15,13 +18,13 @@
  *WetnessAdjustment will be added to the value in the component. Thus, if an acoustics audio component is inside
  *multiple acoustics runtime volumes at any time, it will be affected by the overrides of all those volumes.
  */
-UCLASS(ClassGroup = ProjectAcoustics, hidecategories = (Advanced, Attachment), BlueprintType)
-class PROJECTACOUSTICS_API AAcousticsRuntimeVolume : public AVolume
+UCLASS(MinimalAPI, ClassGroup = ProjectAcoustics, hidecategories = (Advanced, Attachment), BlueprintType)
+class AAcousticsRuntimeVolume : public AVolume
 {
     GENERATED_BODY()
 
 public:
-    AAcousticsRuntimeVolume(const FObjectInitializer& ObjectInitializer);
+    UE_API AAcousticsRuntimeVolume(const FObjectInitializer& ObjectInitializer);
 
     /**
      *	The design params to override the acoustics audio components found inside this volume.
@@ -29,3 +32,5 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics")
     FAcousticsDesignParams OverrideDesignParams;
 };
+
+#undef UE_API

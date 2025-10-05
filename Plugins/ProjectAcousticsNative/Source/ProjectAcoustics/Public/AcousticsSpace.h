@@ -3,10 +3,12 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Modules/ModuleManager.h"
 #include "AcousticsDesignParams.h"
 #include "AcousticsData.h"
+
 #include "AcousticsSpace.generated.h"
+
+#define UE_API PROJECTACOUSTICS_API
 
 UENUM()
 enum class AcousticsDrawParameters : uint8
@@ -21,10 +23,9 @@ enum class AcousticsDrawParameters : uint8
 
 // Loads the Project Acoustics data file (.ACE) and contains the global settings for acoustics. One of these is needed
 // per level.
-UCLASS(
-    config = Engine, hidecategories = Auto, AutoExpandCategories = (Transform, Acoustics), BlueprintType, Blueprintable,
-    ClassGroup = Acoustics, meta = (BlueprintSpawnableComponent))
-class PROJECTACOUSTICS_API AAcousticsSpace : public AActor
+UCLASS(config = Engine, hidecategories = Auto, AutoExpandCategories = (Transform, Acoustics),
+    BlueprintType, Blueprintable, ClassGroup = Acoustics, meta = (BlueprintSpawnableComponent))
+class UE_API AAcousticsSpace : public AActor
 {
     GENERATED_BODY()
 
@@ -34,7 +35,7 @@ public:
     /* ACE file to load. ACE files must be located in <project dir>/Content/Acoustics/, however
        the AcousticsData.uasset can be placed anywhere. */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Acoustics")
-    UAcousticsData* AcousticsData;
+    TObjectPtr<UAcousticsData> AcousticsData;
 
     /** Tile size for streaming acoustic data. Probes within this tile centered at player are kept loaded in RAM.
      * Small tile size will reduce RAM but at cost of frequent loading. Huge sizes containing all probes will load
@@ -53,8 +54,7 @@ public:
      * Smaller caches use less RAM, but have longer lookup times
      * Must be set before the ACE file is loaded
      */
-    UPROPERTY(
-        EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics",
         meta = (UIMin = 0, ClampMin = 0, UIMax = 1, ClampMax = 1))
     float CacheScale;
 
@@ -106,8 +106,7 @@ public:
 
     /** How far away voxels should be rendered from the camera (cm)
      */
-    UPROPERTY(
-        EditAnywhere, BlueprintReadWrite, Category = "Acoustics|Debug Controls",
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Acoustics|Debug Controls",
         meta = (DisplayName = "Voxel Render Distance"))
     float VoxelsVisibleDistance = 1000.0f;
 
@@ -184,3 +183,5 @@ private:
     PostRenderFor(APlayerController* PC, UCanvas* Canvas, FVector CameraPosition, FVector CameraDir) override;
 #endif // UE_BUILD_SHIPPING
 };
+
+#undef UE_API
