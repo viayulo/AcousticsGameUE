@@ -223,23 +223,23 @@ bool FAcousticsEdMode::TagNavigation(bool tag)
                 {
                     auto consent = EAppReturnType::Ok;
 
-                    UE_LOG(
+                    UE_LOGF(
                         LogAcoustics,
                         Warning,
-                        TEXT("Warning: A very large mesh (%s) was tagged for Acoustic Navigation. This may result in a "
-                             "very long probe calculation time. Make sure "
-                             "you haven't accidentally tagged a huge mesh like SkySphere."),
+                        "Warning: A very large mesh (%ls) was tagged for Acoustic Navigation. This may result in a "
+                        "very long probe calculation time. Make sure "
+                        "you haven't accidentally tagged a huge mesh like SkySphere.",
                         *actor->GetName());
                 }
 
                 if (actor->IsA<ANavMeshBoundsVolume>())
                 {
                     allTagsSet = false;
-                    UE_LOG(
+                    UE_LOGF(
                         LogAcoustics,
                         Error,
-                        TEXT("Attempted to tag a NavMeshBoundsVolume as Navigation, which is not supported. Please tag "
-                             "the RecastNavMesh actor as Navigation."),
+                        "Attempted to tag a NavMeshBoundsVolume (%ls) as Navigation, which is not supported. Please tag "
+                        "the RecastNavMesh actor as Navigation.",
                         *(actor->GetName()));
                     continue;
                 }

@@ -33,7 +33,6 @@ IAudioPluginFactory* FProjectAcousticsNativeModule::GetPluginFactory(EAudioPlugi
     {
     case EAudioPlugin::SOURCEDATAOVERRIDE:
         return &SourceDataOverridePluginFactory;
-        break;
     default:
         return nullptr;
     }

@@ -2,39 +2,47 @@
 
 > [!IMPORTANT]
 >
-> This project requires `Git LFS` for it to work properly, `ZIP` downloads **might not work**.
+> This project requires `Git LFS` to function properly. Downloading as a ZIP archive may result in missing or broken assets.
 
 Sample project for evaluating Project Acoustics plugins in Unreal Engine 5.
 
-For additional information, please refer to [ProjectAcoustics](https://github.com/viayulo/ProjectAcoustics).
+For additional **documentation** and **bake tools**, please refer to [ProjectAcoustics](https://github.com/viayulo/ProjectAcoustics).
 
 ## Installation
 
-- Download plugin from [GitHub Releases](https://github.com/viayulo/AcousticsGameUE/releases).
-- Extract and move the plugin folder under your project's `Plugins` folder (install to project), or engine's `Engine/Plugins/Marketplace` folder (install to engine).
+1. Download plugin from [GitHub Releases](https://github.com/viayulo/AcousticsGameUE/releases).
+2. Extract the archive and place the plugin folder into one of the following locations:
+    - Project level: `<YourProject>/Plugins/`
+    - Engine level: `<EngineRoot>/Engine/Plugins/Marketplace/`
+
+> [!NOTE]
+>
+> The latest release is not guaranteed to be compatible with older engine versions.
+> 
+> If you are using an earlier engine version, you may need to modify the source code to resolve compatibility issues, or consider using a previous release that matches your engine version.
 
 ## Known Issues
 
-### The **Spatial Reverb** does not work in non-editor builds.
+### The `Spatial Reverb` does not work in non-editor builds.
 
 - Affected Engine Versions: 5.6 and above
-- How to fix (with **source build** engine):
+- Fix (**source build** engine required):
 
-In `Engine/Source/Runtime/AudioMixer/Private/AudioMixerSource.cpp`, remove the `#if WITH_EDITOR` (and corresponding `#endif // WITH_EDITOR`) preprocessor directives in following lines:
+In `Engine/Source/Runtime/AudioMixer/Private/AudioMixerSource.cpp`, remove the `#if WITH_EDITOR` (and corresponding `#endif // WITH_EDITOR`) lines shown below:
 
 ```cpp
-#if WITH_EDITOR
+#if WITH_EDITOR // <--- REMOVE
 	// The following can spam to the command queue. But is mostly here so that the editor live edits are immedately heard
 	// For anything less than editor this is perf waste, so predicate this only to be run in editor.
 	MixerSourceVoice->SetSourceBufferListener(WaveInstance->SourceBufferListener, WaveInstance->bShouldSourceBufferListenerZeroBuffer);
-#endif // WITH_EDITOR
+#endif // WITH_EDITOR // <--- REMOVE
 ```
 ---
 
-### When using **Spatial Reverb**, the Initialize method is called twice in non-editor builds, causing double virtual speakers to spawn.
+### When using `Spatial Reverb`, the Initialize method is called twice in non-editor builds, causing double virtual speakers to spawn.
 
-- Affected Engine Versions: 5.7 and before
-- How to fix (with **source build** engine):
+- Affected Engine Versions: 5.7 and earlier (fixed in 5.8)
+- Fix (**source build** engine required):
 
 In `Engine/Source/Runtime/Engine/Private/AudioDevice.cpp`, within the `FAudioDevice::SetListener()` function, replace `Listeners` with `ListenerProxies`:
 

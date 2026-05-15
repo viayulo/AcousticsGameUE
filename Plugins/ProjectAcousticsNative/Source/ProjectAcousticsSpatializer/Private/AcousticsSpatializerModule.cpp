@@ -66,7 +66,6 @@ IAudioPluginFactory* FAcousticsSpatializerModule::GetPluginFactory(EAudioPlugin 
     {
     case EAudioPlugin::SPATIALIZATION:
         return &m_SpatializationPluginFactory;
-        break;
     case EAudioPlugin::REVERB:
         return &m_ReverbPluginFactory;
     default:

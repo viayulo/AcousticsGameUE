@@ -1,27 +1,30 @@
 {
-	"FileVersion": 3,
-	"EngineAssociation": "5.7",
-	"Category": "",
-	"Description": "",
-	"Modules": [
-		{
-			"Name": "AcousticsGameUE51",
-			"Type": "Runtime",
-			"LoadingPhase": "Default"
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "Metasound",
-			"Enabled": true
-		},
-		{
-			"Name": "ResonanceAudio",
-			"Enabled": false
-		}
-	],
-	"TargetPlatforms": [
-		"Android",
-		"Windows"
-	]
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "",
+  "Description": "",
+  "Modules": [
+    {
+      "Name": "AcousticsGameUE51",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "Metasound",
+      "Enabled": true
+    },
+    {
+      "Name": "ResonanceAudio",
+      "Enabled": false
+    }
+  ],
+  "TargetPlatforms": [
+    "Android",
+    "Windows"
+  ],
+  "AdditionalRootDirectories": [],
+  "AdditionalPluginDirectories": [],
+  "EpicSampleNameHash": ""
 }
