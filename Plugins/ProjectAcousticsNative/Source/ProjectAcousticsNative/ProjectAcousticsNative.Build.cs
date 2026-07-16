@@ -8,7 +8,6 @@ public class ProjectAcousticsNative : ModuleRules
 {
     public ProjectAcousticsNative(ReadOnlyTargetRules Target) : base(Target)
     {
-
 #if (ENABLE_DEBUGGING)
         PCHUsage = ModuleRules.PCHUsageMode.Default;
         OptimizeCode = CodeOptimization.InShippingBuildsOnly;
@@ -16,57 +15,37 @@ public class ProjectAcousticsNative : ModuleRules
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 #endif
 
-        PublicIncludePaths.AddRange(
-            new string[] {
-                // ... add public include paths required here ...
-                "Runtime/Engine",
-                "Runtime/Core",
-            }
-            );
+        PublicIncludePaths.AddRange([
+            "Runtime/Engine",
+            "Runtime/Core"
+        ]);
 
-        PrivateIncludePaths.AddRange(
-            new string[] {
-                // ... add other private include paths required here ...
-                "ProjectAcousticsNative/Public",
-                "ProjectAcousticsNative/Private"
-            }
-            );
+        PrivateIncludePaths.AddRange([
+            // ... add other private include paths required here ...
+            "ProjectAcousticsNative/Public",
+            "ProjectAcousticsNative/Private"
+        ]);
 
-        PublicDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "AudioExtensions",
-                "Core",
-                "ProjectAcoustics",
-                "CoreUObject",
-                "Engine",
-                "Projects",
-                "MetasoundFrontend",
-                "MetasoundGraphCore",
-                // ... add other public dependencies that you statically link with here ...
-            }
-            );
+        PublicDependencyModuleNames.AddRange([
+            "AudioExtensions",
+            "Core",
+            "ProjectAcoustics",
+            "CoreUObject",
+            "Engine",
+            "Projects",
+            "MetasoundFrontend",
+            "MetasoundGraphCore"
+        ]);
 
+        PrivateDependencyModuleNames.AddRange([
+            "Core",
+            "CoreUObject",
+            "Engine",
+            "AudioMixer",
+            "SignalProcessing"
+        ]);
 
-        PrivateDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                "AudioMixer",
-                "SignalProcessing",
-                // ... add private dependencies that you statically link with here ...
-            }
-            );
-
-
-        DynamicallyLoadedModuleNames.AddRange(
-            new string[]
-            {
-                // ... add any modules that your module loads dynamically here ...
-            }
-            );
+        DynamicallyLoadedModuleNames.AddRange([]);
 
         var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         // fix up include path that is needed for HrtfApiTypes.h

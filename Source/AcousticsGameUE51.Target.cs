@@ -11,6 +11,6 @@ public class AcousticsGameUE51Target : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.Latest;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
-		ExtraModuleNames.AddRange( new string[] { "AcousticsGameUE51" } );
+		ExtraModuleNames.AddRange(["AcousticsGameUE51"]);
 	}
 }

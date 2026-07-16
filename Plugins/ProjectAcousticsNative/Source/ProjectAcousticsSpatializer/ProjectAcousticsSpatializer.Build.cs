@@ -15,54 +15,33 @@ public class ProjectAcousticsSpatializer : ModuleRules
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 #endif
 
-        PublicIncludePaths.AddRange(
-            new string[] {
-                // ... add public include paths required here ...
-                "Runtime/Engine",
-                "Runtime/Core"
-            }
-            );
+        PublicIncludePaths.AddRange([
+            "Runtime/Engine",
+            "Runtime/Core"
+        ]);
 
-        PrivateIncludePaths.AddRange(
-            new string[] {
-                "ProjectAcousticsSpatializer/Public",
-                "ThirdParty/Include",
-                "ProjectAcousticsSpatializer/Private",
-                // ... add other private include paths required here ...
-            }
-            );
+        PrivateIncludePaths.AddRange([
+            "ProjectAcousticsSpatializer/Public",
+            "ThirdParty/Include",
+            "ProjectAcousticsSpatializer/Private"
+        ]);
 
-        PublicDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                "Projects",
-                // ... add other public dependencies that you statically link with here ...
-            }
-            );
+        PublicDependencyModuleNames.AddRange([
+            "Core",
+            "CoreUObject",
+            "Engine",
+            "Projects"
+        ]);
 
+        PrivateDependencyModuleNames.AddRange([
+            "Core",
+            "CoreUObject",
+            "Engine",
+            "AudioMixer",
+            "SignalProcessing"
+        ]);
 
-        PrivateDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                "AudioMixer",
-                "SignalProcessing",
-                // ... add private dependencies that you statically link with here ...
-            }
-            );
-
-
-        DynamicallyLoadedModuleNames.AddRange(
-            new string[]
-            {
-                // ... add any modules that your module loads dynamically here ...
-            }
-            );
+        DynamicallyLoadedModuleNames.AddRange([]);
 
         var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         // fix up include path that is needed for HrtfApiTypes.h

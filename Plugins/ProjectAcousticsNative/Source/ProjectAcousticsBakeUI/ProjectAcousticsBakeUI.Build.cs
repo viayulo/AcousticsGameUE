@@ -17,72 +17,48 @@ public class ProjectAcousticsBakeUI : ModuleRules
         OptimizeCode = CodeOptimization.InShippingBuildsOnly;
         PrivatePCHHeaderFile = "Public/AcousticsEditorModule.h";
 
-        PublicIncludePaths.AddRange(
-            new string[] {
-                // ... add public include paths required here ...
-            }
-            );
+        PublicIncludePaths.AddRange([]);
 
+        PrivateIncludePaths.AddRange([
+            "ThirdParty/Include",
+            "../Source/ProjectAcoustics/Public"
+        ]);
 
-        PrivateIncludePaths.AddRange(
-            new string[] {
-                "ThirdParty/Include",
-                "../Source/ProjectAcoustics/Public"
-                // ... add other private include paths required here ...
-            }
-            );
+        PublicDependencyModuleNames.AddRange([
+            "Core",
+            "MeshDescription",
+            "ProjectAcoustics",
+            "UnrealEd",
+            "EditorFramework",
+            // Adding Source Control module to list of public dependencies to use
+            // source control operations during the prebake and bake process.
+            "SourceControl"
+        ]);
 
+        PrivateDependencyModuleNames.AddRange([
+            "CoreUObject",
+            "Engine",
+            "RenderCore",
+            "Slate",
+            "SlateCore",
+            "InputCore",
+            "UnrealEd",
+            "LevelEditor",
+            "EditorStyle",
+            "Projects",
+            "DeveloperToolSettings",
+            "NavigationSystem",
+            "RawMesh",
+            "StaticMeshDescription",
+            "Landscape",
+            "DesktopWidgets",
+            // Dependencies for converting landscape to static mesh
+            "PropertyEditor",
+            "MeshUtilitiesCommon",
+            "MeshDescription",
+        ]);
 
-        PublicDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "MeshDescription",
-                "ProjectAcoustics",
-                "UnrealEd",
-                "EditorFramework",
-                // ... add other public dependencies that you statically link with here ...
-                // Adding Source Control module to list of public dependencies to use
-                // source control operations during the prebake and bake process.
-                "SourceControl"
-            }
-            );
-
-
-        PrivateDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "CoreUObject",
-                "Engine",
-                "RenderCore",
-                "Slate",
-                "SlateCore",
-                "InputCore",
-                "UnrealEd",
-                "LevelEditor",
-                "EditorStyle",
-                "Projects",
-                "DeveloperToolSettings",
-                "NavigationSystem",
-                "RawMesh",
-                "StaticMeshDescription",
-                "Landscape",
-                "DesktopWidgets",
-                // Dependencies for converting landscape to static mesh
-                "PropertyEditor",
-                "MeshUtilitiesCommon",
-                "MeshDescription",
-                // ... add private dependencies that you statically link with here ...
-            }
-            );
-
-
-        DynamicallyLoadedModuleNames.AddRange(
-            new string[]
-            {
-                // ... add any modules that your module loads dynamically here ...
-            }
-            );
+        DynamicallyLoadedModuleNames.AddRange([]);
 
         const string DllName = "Triton.Preprocessor.dll";
         const string LibName = "Triton.Preprocessor.lib";

@@ -11,7 +11,6 @@ public class ProjectAcoustics : ModuleRules
 {
     public ProjectAcoustics(ReadOnlyTargetRules Target) : base(Target)
     {
-
 #if (ENABLE_DEBUGGING)
         PCHUsage = ModuleRules.PCHUsageMode.Default;
         OptimizeCode = CodeOptimization.InShippingBuildsOnly;
@@ -19,53 +18,31 @@ public class ProjectAcoustics : ModuleRules
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 #endif
 
-        PublicIncludePaths.AddRange(
-            new string[] {
-                // ... add public include paths required here ...
-                "Runtime/Engine",
-                "Runtime/Core"
-            }
-            );
+        PublicIncludePaths.AddRange([
+            "Runtime/Engine",
+            "Runtime/Core"
+        ]);
 
+        PrivateIncludePaths.AddRange([
+            "ProjectAcoustics/Public",
+            "ThirdParty/Include",
+            "ProjectAcoustics/Private"
+        ]);
 
-        PrivateIncludePaths.AddRange(
-            new string[] {
-                "ProjectAcoustics/Public",
-                "ThirdParty/Include",
-                "ProjectAcoustics/Private",
-                // ... add other private include paths required here ...
-            }
-            );
+        PublicDependencyModuleNames.AddRange([
+            "Core",
+            "CoreUObject",
+            "Engine",
+            "Projects"
+        ]);
 
-        PublicDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                "Projects",
-                // ... add other public dependencies that you statically link with here ...
-            }
-            );
+        PrivateDependencyModuleNames.AddRange([
+            "Core",
+            "CoreUObject",
+            "Engine"
+        ]);
 
-
-        PrivateDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                // ... add private dependencies that you statically link with here ...
-            }
-            );
-
-
-        DynamicallyLoadedModuleNames.AddRange(
-            new string[]
-            {
-                // ... add any modules that your module loads dynamically here ...
-            }
-            );
+        DynamicallyLoadedModuleNames.AddRange([]);
 
         var thirdPartyDir = Path.GetFullPath(Path.Combine(PluginDirectory, "Source/ThirdParty"));
         // fix up include path that is needed for TritonApiTypes.h

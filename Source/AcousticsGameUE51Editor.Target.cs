@@ -9,8 +9,8 @@ public class AcousticsGameUE51EditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.Latest;
-        IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
-        ExtraModuleNames.AddRange( new string[] { "AcousticsGameUE51" } );
+		ExtraModuleNames.AddRange(["AcousticsGameUE51"]);
 	}
 }
