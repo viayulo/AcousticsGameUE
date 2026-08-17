@@ -3,14 +3,16 @@
 > [!IMPORTANT]
 >
 > This project requires `Git LFS` to function properly. Downloading as a ZIP archive may result in missing or broken assets.
+>
+> If downloading fails due to GitHub's monthly LFS limits, please download the sample project from **Releases** or wait until next month.
 
 Sample project for evaluating Project Acoustics plugins in Unreal Engine 5.
 
 For additional **documentation** and **bake tools**, please refer to [ProjectAcoustics](https://github.com/viayulo/ProjectAcoustics).
 
-## Installation
+## Plugin Installation
 
-1. Download plugin from [GitHub Releases](https://github.com/viayulo/AcousticsGameUE/releases).
+1. Download **plugin** from [GitHub Releases](https://github.com/viayulo/AcousticsGameUE/releases).
 2. Extract the archive and place the plugin folder into one of the following locations:
     - Project level: `<YourProject>/Plugins/`
     - Engine level: `<EngineRoot>/Engine/Plugins/Marketplace/`
