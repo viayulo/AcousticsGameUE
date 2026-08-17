@@ -4,7 +4,7 @@
 >
 > This project requires `Git LFS` to function properly. Downloading as a ZIP archive may result in missing or broken assets.
 >
-> If downloading fails due to GitHub's monthly LFS limits, please download the sample project from **Releases** or wait until next month.
+> If downloading fails due to GitHub's monthly LFS limits, please download the sample project from [Releases](https://github.com/viayulo/AcousticsGameUE/releases) or wait until next month.
 
 Sample project for evaluating Project Acoustics plugins in Unreal Engine 5.
 

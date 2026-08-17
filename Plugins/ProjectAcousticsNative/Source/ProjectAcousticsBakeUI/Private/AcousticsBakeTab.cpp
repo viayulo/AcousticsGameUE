@@ -363,7 +363,7 @@ FReply SAcousticsBakeTab::OnLocalBakeButton()
 
 FReply SAcousticsBakeTab::OnDownloadLocalBakeToolsButton() const
 {
-    FString url = TEXT("https://github.com/viayulo/ProjectAcoustics/tree/main/Archive/CommandLineLocalBakeTools");
+    FString url = TEXT("https://github.com/viayulo/ProjectAcoustics/releases");
     FPlatformProcess::LaunchURL(*url, nullptr, nullptr);
     return FReply::Handled();
 }
