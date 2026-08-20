@@ -11,7 +11,6 @@
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "AcousticsShared.h"
-#include <string>
 
 using namespace TritonRuntime;
 
@@ -938,15 +937,11 @@ void FProjectAcousticsDebugRender::DrawSources(AcousticsDrawParameters shouldDra
                 const auto& message = messageList[mess];
                 if (message.Type == TritonRuntime::QueryDebugInfo::Warning)
                 {
-                    const std::wstring wMessageString{ message.MessageString };
-                    const std::string messageString{ wMessageString.cbegin(), wMessageString.cend() };
-                    errString += FString::Printf(TEXT("\nWARN: %hs"), messageString.c_str());
+                    errString += "\nWARN: " + FString{ FWCharToTCHAR(message.MessageString) };
                 }
                 else if (message.Type == TritonRuntime::QueryDebugInfo::Error)
                 {
-                    const std::wstring wMessageString{ message.MessageString };
-                    const std::string messageString{ wMessageString.cbegin(), wMessageString.cend() };
-                    errString += FString::Printf(TEXT("\nERR: %hs"), messageString.c_str());
+                    errString += "\nERR: " + FString{ FWCharToTCHAR(message.MessageString) };
                 }
             }
         }
